@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+# Builds the TanStack Start app into a static SPA and publishes it to GitHub
+# Pages. Pages cannot run the app's Node/Nitro server, so we ship the prebuilt
+# static client (dist/client) instead.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissions required by the Pages deployment action.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent Pages deployment; let in-progress runs finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.11"
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build static SPA
+        run: bun run build
+        env:
+          # Project site is served from https://<user>.github.io/Portofolio/
+          BASE_PATH: /Portofolio/
+
+      - name: Prepare output for GitHub Pages
+        run: |
+          # SPA mode emits _shell.html as the catch-all shell. Pages serves
+          # index.html for a directory and 404.html for unknown paths, so use
+          # the shell for both. .nojekyll stops Pages from stripping files.
+          cp dist/client/_shell.html dist/client/index.html
+          cp dist/client/_shell.html dist/client/404.html
+          touch dist/client/.nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/client
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
