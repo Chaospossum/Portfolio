@@ -1,7 +1,10 @@
 import type { ReactNode } from "react";
 import { ACCENTS, type AccentKey, Reveal } from "./lab";
 import { useT } from "./i18n";
-import thesisAsset from "@/assets/thesis.pdf.asset.json";
+
+// Thesis PDF lives in /public and is served from the deploy base path
+// (e.g. /Portofolio/ on GitHub Pages), so build the URL from BASE_URL.
+const thesisUrl = `${import.meta.env.BASE_URL}Training-for-Robustness-Nicole-Duque.pdf`;
 
 function Block({
   meta,
@@ -93,7 +96,7 @@ export function Work() {
             <p>{t("work.1.p3")}</p>
             <p>
               <a
-                href={thesisAsset.url}
+                href={thesisUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink hover:border-ink hover:text-vermillion focus-visible:outline-2 focus-visible:outline-okabe-blue"
