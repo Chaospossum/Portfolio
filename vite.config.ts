@@ -7,9 +7,9 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 // Base path for deployment. On GitHub Pages this is a project site served from
-// https://<user>.github.io/Portofolio/, so assets and routes must be prefixed
-// with "/Portofolio/". Override via the BASE_PATH env var; defaults to "/" so
-// `vite dev` and local previews keep working at the root.
+// https://<user>.github.io/<repo>/, so assets and routes must be prefixed with
+// "/<repo>/". The CI workflow sets BASE_PATH from the repo name; defaults to
+// "/" so `vite dev` and local previews keep working at the root.
 const base = process.env.BASE_PATH ?? "/";
 
 export default defineConfig({

@@ -7,7 +7,7 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
-    // Honour the deploy base path (e.g. "/Portofolio/" on GitHub Pages) so
+    // Honour the deploy base path (e.g. "/<repo>/" on GitHub Pages) so
     // client-side routing matches the URL the app is actually served from.
     basepath: import.meta.env.BASE_URL,
     context: { queryClient },

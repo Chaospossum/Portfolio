@@ -3,7 +3,7 @@ import { ACCENTS, type AccentKey, Reveal } from "./lab";
 import { useT } from "./i18n";
 
 // Thesis PDF lives in /public and is served from the deploy base path
-// (e.g. /Portofolio/ on GitHub Pages), so build the URL from BASE_URL.
+// (e.g. /<repo>/ on GitHub Pages), so build the URL from BASE_URL.
 const thesisUrl = `${import.meta.env.BASE_URL}Training-for-Robustness-Nicole-Duque.pdf`;
 
 function Block({

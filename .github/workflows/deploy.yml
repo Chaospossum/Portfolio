@@ -36,10 +36,13 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build static SPA
-        run: bun run build
-        env:
-          # Project site is served from https://<user>.github.io/Portofolio/
-          BASE_PATH: /Portofolio/
+        # Derive the base path from the repo name so the project site works at
+        # https://<user>.github.io/<repo>/ and keeps working if the repo is
+        # ever renamed. GITHUB_REPOSITORY is "owner/repo"; strip the owner.
+        run: |
+          export BASE_PATH="/${GITHUB_REPOSITORY#*/}/"
+          echo "Building with base path: $BASE_PATH"
+          bun run build
 
       - name: Prepare output for GitHub Pages
         run: |
