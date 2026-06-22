@@ -178,6 +178,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Bump the base size so body copy and headings read a bit larger across the
+     whole site (16px default -> 18px). rem-based sizes scale proportionally. */
+  font-size: 112.5%;
 }
 @media (prefers-reduced-motion: reduce) {
   html {
