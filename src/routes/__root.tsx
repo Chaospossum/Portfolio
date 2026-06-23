@@ -81,8 +81,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Nicole Duque builds small setups to understand how visual information is captured, processed, and where it breaks." },
       { name: "author", content: "Nicole Duque" },
       { property: "og:title", content: "Nicole Duque, Imaging Engineering" },
-      { property: "og:description", content: "Imaging engineering, computer vision systems, and experimental hardware. Luxembourg." },
+      { property: "og:description", content: "Nicole Duque builds small setups to understand how visual information is captured, processed, and where it breaks. Imaging engineering, computer vision systems, and experimental hardware." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://chaospossum.github.io/Portfolio/" },
+      { property: "og:site_name", content: "Nicole Duque - Imaging Engineering" },
+      { property: "og:image", content: "https://chaospossum.github.io/Portfolio/og-image.png" },
       { name: "twitter:card", content: "summary" },
     ],
     links: [
