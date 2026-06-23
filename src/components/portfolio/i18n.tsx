@@ -103,8 +103,6 @@ const dict: Record<Locale, Record<string, string>> = {
     "about.langs": "LANGUAGES: LUXEMBOURGISH (NATIVE), FRENCH, GERMAN, ENGLISH, SPANISH, ITALIAN",
     "about.tv.a": "Fun fact: I was on TV. I competed in season one of Take Off, Luxembourg's national science challenge show on RTL. ",
     "about.tv.link": "Here is my interview",
-    "about.outside": "Outside the lab I build embedded electronics, spend time in museums and with Luxembourgish heraldry, and sell empanadas at markets as Pastelitos de Maiz.",
-
     "exp.plate": "PLATE 04 / EXPERIENCE & EDUCATION",
     "exp.title.a": "Experience and",
     "exp.title.b": "education",
