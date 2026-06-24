@@ -251,7 +251,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "about.langs": "LANGUES : LUXEMBOURGEOIS (NATIVE), FRANÇAIS, ALLEMAND, ANGLAIS, ESPAGNOL, ITALIEN",
     "about.tv.a": "Anecdote : je suis passée à la télé. J'ai participé à la première saison de Take Off, l'émission scientifique nationale du Luxembourg sur RTL. ",
     "about.tv.link": "Voici mon interview",
-    "about.outside": "Hors du laboratoire je bricole de l'électronique embarquée, je passe du temps dans les musées et avec l'héraldique luxembourgeoise, et je vends des empanadas sur les marchés sous le nom Pastelitos de Maiz.",
+    "about.outside": "",
 
     "exp.plate": "PLANCHE 04 / PARCOURS & FORMATION",
     "exp.title.a": "Parcours et",
