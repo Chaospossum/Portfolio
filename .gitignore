@@ -20,6 +20,11 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Assistant/tooling folders
+.lovable/
+.claude/
+.junie/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
