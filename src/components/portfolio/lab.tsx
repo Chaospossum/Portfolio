@@ -111,3 +111,21 @@ export function useInView<T extends HTMLElement>(margin = "0px 0px -15% 0px") {
   }, [margin]);
   return { ref, inView };
 }
+
+/** Scroll-spy: the id of the section currently crossing the middle band of the viewport. */
+export function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
+    const els = ids.map((id) => document.getElementById(id)).filter((e): e is HTMLElement => !!e);
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [ids.join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
+  return active;
+}

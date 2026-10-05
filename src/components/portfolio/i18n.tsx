@@ -184,6 +184,8 @@ const dict: Record<Locale, Record<string, string>> = {
     "contact.email": "EMAIL",
     "contact.linkedin": "LINKEDIN",
     "contact.github": "GITHUB",
+    "foot.place": "Luxembourg · 49.6 N, 6.1 E",
+    "foot.colophon": "Set in Michroma and Newsreader, two inks on paper",
   },
   fr: {
     "nav.work": "Travaux",
@@ -356,6 +358,8 @@ const dict: Record<Locale, Record<string, string>> = {
     "contact.email": "COURRIEL",
     "contact.linkedin": "LINKEDIN",
     "contact.github": "GITHUB",
+    "foot.place": "Luxembourg · 49,6 N, 6,1 E",
+    "foot.colophon": "Composé en Michroma et Newsreader, deux encres sur papier",
   },
 };
 
