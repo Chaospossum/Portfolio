@@ -30,7 +30,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "mast.kicker.2": "MOLECULAR IMAGING",
     "mast.kicker.3": "INSTRUMENTATION & HARDWARE",
     "mast.kicker.4": "LUXEMBOURG",
-    "mast.intro": "I am an imaging engineering master's student. I work close to the data and the hardware, building small setups to understand how an image is captured, processed, and where it breaks. Below is a piece of my BSc thesis you can play with.",
+    "mast.intro": "I am an imaging engineering master's student. I work close to the data and the hardware, building small setups to understand how an image is captured, processed, and where it breaks. The figure below comes from my BSc thesis: a test of how far a vision model bends before it breaks.",
     "mast.available": "Open to research collaboration",
 
     "panel.plate": "INTERACTIVE FIGURE",
@@ -89,7 +89,7 @@ const dict: Record<Locale, Record<string, string>> = {
 
     "work.6.title": "Imaging labs",
     "work.6.meta": "MSc LABS, 2026   AREAS: CT, ultrasound, mass spectrometry, MRI",
-    "work.6.p1": "I measured CT image quality on a test phantom, built ultrasound phantoms to create artefacts on purpose, classified tissue from surgical smoke with mass spectrometry, and reconstructed MRI images from raw k-space data.",
+    "work.6.p1": "I measured CT image quality on a test phantom, built ultrasound phantoms to create artefacts on purpose, classified tissue from surgical smoke with mass spectrometry, and reconstructed MRI images from k-space data.",
 
     "work.7.title": "ANUMA, choosing where to land on the Moon",
     "work.7.meta": "STATUS: finalist, space innovation challenge 2026   STACK: Python, FastAPI, rasterio, Leaflet   DATA: orbital terrain maps",
@@ -99,10 +99,10 @@ const dict: Record<Locale, Record<string, string>> = {
     "work.8.title": "SortSight, a low-cost fibre scanner for textile sorting",
     "work.8.meta": "STAGE: Brightlands Startup Challenge 2026   METHOD: near-infrared spectroscopy, camera, on-device ML",
     "work.8.p1": "For the Brightlands Startup Challenge I am developing SortSight, a table-top scan box that tells what a piece of clothing is made of (cotton, polyester, wool, blends), so small collection points can sort textiles for recycling.",
-    "work.8.p2": "The feasibility work was the interesting part: the fibre bands sit between about 1200 and 1700 nm, beyond what silicon sensors can see. Instead of a full spectrometer, the design uses an InGaAs photodiode with a set of short-wave infrared LEDs, to reach a price small sorters can afford.",
+    "work.8.p2": "The feasibility work was the interesting part: the fibre bands sit between about 1200 and 1700 nm, beyond what silicon sensors can see. Instead of a full spectrometer, the proposed design uses an InGaAs photodiode with a set of short-wave infrared LEDs, to reach a price small sorters can afford.",
 
     "work.6.img.alt": "Four panels: a synthetic head phantom, its k-space magnitude, the image rebuilt from the centre lines only, and from the outer lines only",
-    "work.6.img.cap": "FIG. MRI from raw k-space: the centre lines carry the contrast, the outer lines carry the edges.",
+    "work.6.img.cap": "FIG. MRI reconstruction from k-space on a synthetic phantom: the centre lines carry the contrast, the outer lines carry the edges.",
     "work.7.img.alt": "Map of the lunar south pole coloured by landing-site suitability, with numbered candidate sites",
     "work.7.img.cap": "FIG. Prototype score map of the lunar south pole with ranked candidate sites.",
     "work.8.img.alt": "Concept illustration of a table-top scan box with a camera arm, an onboard computer and a ring of infrared LEDs around one sensor",
@@ -130,7 +130,7 @@ const dict: Record<Locale, Record<string, string>> = {
 
     "about.plate": "PLATE 03 / ABOUT",
     "about.title": "About",
-    "about.p1": "I am a Luxembourgish engineer and scientist doing an MSc in Imaging Engineering at Maastricht University, with a focus on data and AI and on instrumentation, after a BSc in Physics and Mathematics at University College Maastricht. Alongside my studies I am a selected participant in the AI Academy at the Digital Learning Hub in Luxembourg.",
+    "about.p1": "I am a Luxembourgish physicist doing an MSc in Imaging Engineering at Maastricht University, working across data and AI and instrumentation, after a BSc in Physics and Mathematics at University College Maastricht. Alongside my studies I am a selected participant in the AI Academy at the Digital Learning Hub in Luxembourg.",
     "about.p2": "I like problems that need both careful maths and something built with my hands, and I do my best work in iterative, experimental places like makerspaces and labs.",
     "about.langs": "LANGUAGES: LUXEMBOURGISH (NATIVE), FRENCH, GERMAN, ENGLISH, SPANISH, ITALIAN",
     "about.tv.a": "Fun fact: I was on TV. I competed in season one of Take Off, Luxembourg's national science challenge show on RTL. ",
@@ -148,7 +148,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "exp.e1.org": "Ingenieurs et Scientifiques du Luxembourg",
     "exp.e1.note": "Hands on science and engineering workshops for children aged 8 to 12 across Luxembourg, covering electronics, mechanics, and pneumatics.",
     "exp.e3.date": "OCT 2025 — PRESENT",
-    "exp.e3.title": "Animateur spécialisé, Makerspace",
+    "exp.e3.title": "Makerspace Facilitator",
     "exp.e3.org": "Service National de la Jeunesse, Hollerich",
     "exp.e4.date": "AUG 2025 — PRESENT",
     "exp.e4.title": "Student Ambassador",
@@ -161,7 +161,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "exp.e6.org": "Service National de la Jeunesse",
 
     "exp.ed1.date": "SEP 2026 — PRESENT",
-    "exp.ed1.title": "MSc Imaging Engineering, Data & AI and Instrumentation",
+    "exp.ed1.title": "MSc Imaging Engineering",
     "exp.ed1.org": "Maastricht University",
     "exp.ed2.date": "APR 2026 — MAR 2027",
     "exp.ed2.title": "AI Academy, Machine Learning",
@@ -207,7 +207,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "mast.kicker.2": "IMAGERIE MOLÉCULAIRE",
     "mast.kicker.3": "INSTRUMENTATION & MATÉRIEL",
     "mast.kicker.4": "LUXEMBOURG",
-    "mast.intro": "Je suis étudiante en master d'ingénierie d'imagerie. Je travaille au plus près des données et du matériel, en construisant de petits dispositifs pour comprendre comment une image est captée, traitée, et où elle se brise. Voici un extrait de mon mémoire de licence avec lequel vous pouvez jouer.",
+    "mast.intro": "Je suis étudiante en master d'ingénierie d'imagerie. Je travaille au plus près des données et du matériel, en construisant de petits dispositifs pour comprendre comment une image est captée, traitée, et où elle se brise. La figure ci-dessous vient de mon mémoire de licence : un test de la résistance d'un modèle de vision avant qu'il ne casse.",
     "mast.available": "Ouverte aux collaborations de recherche",
 
     "panel.plate": "FIGURE INTERACTIVE",
@@ -266,7 +266,7 @@ const dict: Record<Locale, Record<string, string>> = {
 
     "work.6.title": "Laboratoires d'imagerie",
     "work.6.meta": "LABOS DE MASTER, 2026   DOMAINES : CT, échographie, spectrométrie de masse, IRM",
-    "work.6.p1": "J'ai mesuré la qualité d'image CT sur un fantôme de test, construit des fantômes d'échographie pour créer des artefacts exprès, classé des tissus à partir de la fumée chirurgicale par spectrométrie de masse, et reconstruit des images IRM à partir de données brutes de l'espace k.",
+    "work.6.p1": "J'ai mesuré la qualité d'image CT sur un fantôme de test, construit des fantômes d'échographie pour créer des artefacts exprès, classé des tissus à partir de la fumée chirurgicale par spectrométrie de masse, et reconstruit des images IRM à partir de données de l'espace k.",
 
     "work.7.title": "ANUMA, choisir où se poser sur la Lune",
     "work.7.meta": "STATUT : finaliste, challenge d'innovation spatiale 2026   PILE : Python, FastAPI, rasterio, Leaflet   DONNÉES : cartes de terrain orbitales",
@@ -276,10 +276,10 @@ const dict: Record<Locale, Record<string, string>> = {
     "work.8.title": "SortSight, un scanner de fibres à bas coût pour le tri textile",
     "work.8.meta": "ÉTAPE : Brightlands Startup Challenge 2026   MÉTHODE : spectroscopie proche infrarouge, caméra, ML embarqué",
     "work.8.p1": "Pour le Brightlands Startup Challenge, je développe SortSight, un boîtier de scan de table qui identifie la composition d'un vêtement (coton, polyester, laine, mélanges), pour que les petits points de collecte puissent trier les textiles en vue du recyclage.",
-    "work.8.p2": "L'étude de faisabilité était la partie intéressante : les bandes des fibres se situent entre environ 1200 et 1700 nm, au-delà de ce que voient les capteurs en silicium. Au lieu d'un spectromètre complet, le design utilise une photodiode InGaAs avec un ensemble de LED infrarouges à ondes courtes, pour atteindre un prix abordable pour les petits trieurs.",
+    "work.8.p2": "L'étude de faisabilité était la partie intéressante : les bandes des fibres se situent entre environ 1200 et 1700 nm, au-delà de ce que voient les capteurs en silicium. Au lieu d'un spectromètre complet, le design proposé utilise une photodiode InGaAs avec un ensemble de LED infrarouges à ondes courtes, pour atteindre un prix abordable pour les petits trieurs.",
 
     "work.6.img.alt": "Quatre panneaux : un fantôme de tête synthétique, la magnitude de son espace k, l'image reconstruite à partir des seules lignes centrales, puis des seules lignes extérieures",
-    "work.6.img.cap": "FIG. IRM à partir de l'espace k brut : les lignes centrales portent le contraste, les lignes extérieures les contours.",
+    "work.6.img.cap": "FIG. Reconstruction IRM depuis l'espace k sur un fantôme synthétique : les lignes centrales portent le contraste, les lignes extérieures les contours.",
     "work.7.img.alt": "Carte du pôle sud lunaire colorée selon l'aptitude à l'atterrissage, avec des sites candidats numérotés",
     "work.7.img.cap": "FIG. Carte de scores du prototype au pôle sud lunaire, avec les sites candidats classés.",
     "work.8.img.alt": "Illustration conceptuelle d'un boîtier de scan de table avec un bras caméra, un ordinateur embarqué et un anneau de LED infrarouges autour d'un capteur",
@@ -307,7 +307,7 @@ const dict: Record<Locale, Record<string, string>> = {
 
     "about.plate": "PLANCHE 03 / À PROPOS",
     "about.title": "À propos",
-    "about.p1": "Je suis une ingénieure et scientifique luxembourgeoise en master d'Ingénierie d'Imagerie à l'Université de Maastricht, orientée données et IA ainsi qu'instrumentation, après une licence en Physique et Mathématiques à University College Maastricht. En parallèle, je suis participante sélectionnée à l'AI Academy du Digital Learning Hub au Luxembourg.",
+    "about.p1": "Je suis une physicienne luxembourgeoise en master d'Ingénierie d'Imagerie à l'Université de Maastricht, entre données et IA et instrumentation, après une licence en Physique et Mathématiques à University College Maastricht. En parallèle, je suis participante sélectionnée à l'AI Academy du Digital Learning Hub au Luxembourg.",
     "about.p2": "J'aime les problèmes qui demandent à la fois des maths rigoureuses et quelque chose à construire de mes mains, et je travaille mieux dans des lieux itératifs et expérimentaux comme les makerspaces et les laboratoires.",
     "about.langs": "LANGUES : LUXEMBOURGEOIS (NATIVE), FRANÇAIS, ALLEMAND, ANGLAIS, ESPAGNOL, ITALIEN",
     "about.tv.a": "Anecdote : je suis passée à la télé. J'ai participé à la première saison de Take Off, l'émission scientifique nationale du Luxembourg sur RTL. ",
@@ -340,7 +340,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "exp.e6.org": "Service National de la Jeunesse",
 
     "exp.ed1.date": "SEPT. 2026 — PRÉSENT",
-    "exp.ed1.title": "Master en Ingénierie d'Imagerie, Données & IA et Instrumentation",
+    "exp.ed1.title": "Master en Ingénierie d'Imagerie",
     "exp.ed1.org": "Université de Maastricht",
     "exp.ed2.date": "AVR. 2026 — MARS 2027",
     "exp.ed2.title": "AI Academy, Apprentissage automatique",

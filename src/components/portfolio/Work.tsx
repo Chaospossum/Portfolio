@@ -125,16 +125,6 @@ export function Work() {
         <div className="mt-10">
           <Block
             figure="2.1"
-            accent="green"
-            meta={t("work.9.meta")}
-            title={t("work.9.title")}
-          >
-            <p>{t("work.9.p1")}</p>
-            <p>{t("work.9.p2")}</p>
-          </Block>
-
-          <Block
-            figure="2.2"
             accent="vermillion"
             meta={t("work.10.meta")}
             title={t("work.10.title")}
@@ -147,6 +137,16 @@ export function Work() {
             <p>{t("work.10.p1")}</p>
             <p>{t("work.10.p2")}</p>
             <p>{t("work.10.p3")}</p>
+          </Block>
+
+          <Block
+            figure="2.2"
+            accent="green"
+            meta={t("work.9.meta")}
+            title={t("work.9.title")}
+          >
+            <p>{t("work.9.p1")}</p>
+            <p>{t("work.9.p2")}</p>
           </Block>
 
           <Block
