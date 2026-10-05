@@ -6,12 +6,31 @@ import { useT } from "./i18n";
 // (e.g. /<repo>/ on GitHub Pages), so build the URL from BASE_URL.
 const thesisUrl = `${import.meta.env.BASE_URL}Training-for-Robustness-Nicole-Duque.pdf`;
 
+// Files in /public/work, resolved against the same base path.
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
+function DocLink({ href, accent, children }: { href: string; accent: AccentKey; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center gap-2 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink hover:border-ink hover:text-vermillion focus-visible:outline-2 focus-visible:outline-okabe-blue"
+    >
+      <span aria-hidden="true" className="inline-block h-[6px] w-[6px] rounded-full" style={{ background: ACCENTS[accent] }} />
+      {children} ↗
+    </a>
+  );
+}
+
 function Block({
   meta,
   title,
   figure,
   accent,
   footnote,
+  image,
+  docs,
   children,
 }: {
   meta: string;
@@ -19,6 +38,8 @@ function Block({
   figure: string;
   accent: AccentKey;
   footnote?: string;
+  image?: { src: string; alt: string; caption: string };
+  docs?: { href: string; label: string }[];
   children: ReactNode;
 }) {
   const t = useT();
@@ -51,6 +72,28 @@ function Block({
           <div className="mt-4 max-w-[62ch] space-y-3 font-body text-base leading-relaxed text-ink">
             {children}
           </div>
+          {image ? (
+            <figure className="mt-6 max-w-[62ch]">
+              <img
+                src={asset(image.src)}
+                alt={image.alt}
+                loading="lazy"
+                className="w-full border border-rule"
+              />
+              <figcaption className="mt-2 font-mono text-[11px] leading-relaxed text-muted-ink">
+                {image.caption}
+              </figcaption>
+            </figure>
+          ) : null}
+          {docs && docs.length > 0 ? (
+            <p className="mt-5 flex flex-wrap gap-3">
+              {docs.map((d) => (
+                <DocLink key={d.href} href={asset(d.href)} accent={accent}>
+                  {d.label}
+                </DocLink>
+              ))}
+            </p>
+          ) : null}
           {footnote ? (
             <p className="mt-5 max-w-[62ch] border-t border-rule pt-3 font-mono text-[11px] leading-relaxed text-muted-ink">
               <span className="text-ink">†</span> {footnote}
@@ -82,6 +125,82 @@ export function Work() {
         <div className="mt-10">
           <Block
             figure="2.1"
+            accent="blue"
+            meta={t("work.0.meta")}
+            title={t("work.0.title")}
+          >
+            <p>{t("work.0.p1")}</p>
+            <p>{t("work.0.p2")}</p>
+            <p>{t("work.0.p3")}</p>
+          </Block>
+
+          <Block
+            figure="2.2"
+            accent="green"
+            meta={t("work.9.meta")}
+            title={t("work.9.title")}
+          >
+            <p>{t("work.9.p1")}</p>
+            <p>{t("work.9.p2")}</p>
+          </Block>
+
+          <Block
+            figure="2.3"
+            accent="vermillion"
+            meta={t("work.10.meta")}
+            title={t("work.10.title")}
+            image={{ src: "work/daq-board.webp", alt: t("work.10.img.alt"), caption: t("work.10.img.cap") }}
+            docs={[{ href: "work/daq-board-schematic.pdf", label: t("work.doc.schematic") }]}
+          >
+            <p>{t("work.10.p1")}</p>
+            <p>{t("work.10.p2")}</p>
+          </Block>
+
+          <Block
+            figure="2.4"
+            accent="orange"
+            meta={t("work.11.meta")}
+            title={t("work.11.title")}
+            image={{ src: "work/daq-shield.webp", alt: t("work.11.img.alt"), caption: t("work.11.img.cap") }}
+            docs={[{ href: "work/daq-shield-schematic.pdf", label: t("work.doc.schematic") }]}
+          >
+            <p>{t("work.11.p1")}</p>
+            <p>{t("work.11.p2")}</p>
+          </Block>
+
+          <Block
+            figure="2.5"
+            accent="blue"
+            meta={t("work.6.meta")}
+            title={t("work.6.title")}
+            image={{ src: "work/kspace.webp", alt: t("work.6.img.alt"), caption: t("work.6.img.cap") }}
+          >
+            <p>{t("work.6.p1")}</p>
+          </Block>
+
+          <Block
+            figure="2.6"
+            accent="purple"
+            meta={t("work.7.meta")}
+            title={t("work.7.title")}
+            image={{ src: "work/anuma-map.webp", alt: t("work.7.img.alt"), caption: t("work.7.img.cap") }}
+          >
+            <p>{t("work.7.p1")}</p>
+            <p>{t("work.7.p2")}</p>
+          </Block>
+
+          <Block
+            figure="2.7"
+            accent="orange"
+            meta={t("work.8.meta")}
+            title={t("work.8.title")}
+            image={{ src: "work/sortsight-concept.webp", alt: t("work.8.img.alt"), caption: t("work.8.img.cap") }}
+          >
+            <p>{t("work.8.p1")}</p>
+            <p>{t("work.8.p2")}</p>
+          </Block>
+          <Block
+            figure="2.8"
             accent="vermillion"
             meta={t("work.1.meta")}
             title={t("work.1.title")}
@@ -108,7 +227,7 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.2"
+            figure="2.9"
             accent="blue"
             meta={t("work.2.meta")}
             title={t("work.2.title")}
@@ -118,32 +237,13 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.3"
+            figure="2.10"
             accent="orange"
             meta={t("work.3.meta")}
             title={t("work.3.title")}
           >
             <p>{t("work.3.p1")}</p>
             <p>{t("work.3.p2")}</p>
-          </Block>
-
-          <Block
-            figure="2.4"
-            accent="purple"
-            meta={t("work.4.meta")}
-            title={t("work.4.title")}
-          >
-            <p>{t("work.4.p1")}</p>
-            <p>{t("work.4.p2")}</p>
-          </Block>
-
-          <Block
-            figure="2.5"
-            accent="green"
-            meta={t("work.5.meta")}
-            title={t("work.5.title")}
-          >
-            <p>{t("work.5.p1")}</p>
           </Block>
         </div>
       </div>
