@@ -149,7 +149,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "exp.cert": "CERTIFICATIONS & RECOGNITION",
     "exp.present": "PRESENT",
 
-    "exp.e1.date": "MAY 2026 — PRESENT",
+    "exp.e1.date": "MAY 2026 — OCT 2026",
     "exp.e1.title": "STEM Workshop Facilitator",
     "exp.e1.org": "Ingenieurs et Scientifiques du Luxembourg",
     "exp.e1.note": "Hands on science and engineering workshops for children aged 8 to 12 across Luxembourg, covering electronics, mechanics, and pneumatics.",
@@ -334,7 +334,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "exp.cert": "CERTIFICATIONS & DISTINCTIONS",
     "exp.present": "PRÉSENT",
 
-    "exp.e1.date": "MAI 2026 — PRÉSENT",
+    "exp.e1.date": "MAI 2026 — OCT. 2026",
     "exp.e1.title": "Animatrice d'ateliers STEM",
     "exp.e1.org": "Ingénieurs et Scientifiques du Luxembourg",
     "exp.e1.note": "Ateliers de sciences et d'ingénierie pour enfants de 8 à 12 ans à travers le Luxembourg, en électronique, mécanique et pneumatique.",
