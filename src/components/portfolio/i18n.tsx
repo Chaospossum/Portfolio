@@ -139,7 +139,7 @@ const dict: Record<Locale, Record<string, string>> = {
 
     "exp.e1.date": "MAY 2026 — OCT 2026",
     "exp.e1.title": "STEM Workshop Facilitator",
-    "exp.e1.org": "Ingenieurs et Scientifiques du Luxembourg",
+    "exp.e1.org": "Ingénieurs et Scientifiques du Luxembourg",
     "exp.e1.note": "Hands on science and engineering workshops for children aged 8 to 12 across Luxembourg, covering electronics, mechanics, and pneumatics.",
     "exp.e3.date": "OCT 2025 — PRESENT",
     "exp.e3.title": "Makerspace Facilitator (school holidays)",
