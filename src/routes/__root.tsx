@@ -86,13 +86,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:url", content: "https://chaospossum.github.io/Portfolio/" },
       { property: "og:site_name", content: "Nicole Duque - Imaging Engineering" },
       { property: "og:image", content: "https://chaospossum.github.io/Portfolio/og-image.png" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://chaospossum.github.io/Portfolio/og-image.png" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "canonical", href: "https://chaospossum.github.io/Portfolio/" },
+      { rel: "icon", type: "image/svg+xml", href: `${import.meta.env.BASE_URL}favicon.svg` },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

@@ -15,7 +15,7 @@ function DocLink({ href, accent, children }: { href: string; accent: AccentKey; 
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex items-center gap-2 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink hover:border-ink hover:text-vermillion focus-visible:outline-2 focus-visible:outline-okabe-blue"
+      className="inline-flex items-center gap-2 border border-rule px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-ink hover:border-ink hover:text-vermillion focus-visible:outline-2 focus-visible:outline-okabe-blue"
     >
       <span aria-hidden="true" className="inline-block h-[6px] w-[6px] rounded-full" style={{ background: ACCENTS[accent] }} />
       {children} ↗
@@ -66,7 +66,7 @@ function Block({
           >
             {title}
           </h3>
-          <p className="mt-3 whitespace-pre-wrap break-words font-mono text-[11px] uppercase tracking-[0.14em] text-muted-ink">
+          <p className="mt-3 whitespace-pre-wrap break-words font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
             {meta}
           </p>
           <div className="mt-4 max-w-[62ch] space-y-3 font-body text-base leading-relaxed text-ink">
@@ -80,7 +80,7 @@ function Block({
                 loading="lazy"
                 className="w-full border border-rule"
               />
-              <figcaption className="mt-2 font-mono text-[11px] leading-relaxed text-muted-ink">
+              <figcaption className="mt-2 font-mono text-xs leading-relaxed text-muted-ink">
                 {image.caption}
               </figcaption>
             </figure>
@@ -95,7 +95,7 @@ function Block({
             </p>
           ) : null}
           {footnote ? (
-            <p className="mt-5 max-w-[62ch] border-t border-rule pt-3 font-mono text-[11px] leading-relaxed text-muted-ink">
+            <p className="mt-5 max-w-[62ch] border-t border-rule pt-3 font-mono text-xs leading-relaxed text-muted-ink">
               <span className="text-ink">†</span> {footnote}
             </p>
           ) : null}
@@ -110,7 +110,7 @@ export function Work() {
   return (
     <section id="work" aria-labelledby="work-heading" className="border-b border-rule">
       <div className="mx-auto max-w-[960px] px-5 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
           <span
             aria-hidden="true"
             className="inline-block h-[7px] w-[7px] rounded-full"
@@ -134,6 +134,7 @@ export function Work() {
               { href: "work/daq-shield-schematic.pdf", label: t("work.doc.shield") },
             ]}
           >
+            <p>{t("work.10.p0")}</p>
             <p>{t("work.10.p1")}</p>
             <p>{t("work.10.p2")}</p>
             <p>{t("work.10.p3")}</p>
@@ -141,56 +142,6 @@ export function Work() {
 
           <Block
             figure="2.2"
-            accent="green"
-            meta={t("work.9.meta")}
-            title={t("work.9.title")}
-          >
-            <p>{t("work.9.p1")}</p>
-            <p>{t("work.9.p2")}</p>
-          </Block>
-
-          <Block
-            figure="2.3"
-            accent="blue"
-            meta={t("work.6.meta")}
-            title={t("work.6.title")}
-            image={{ src: "work/kspace.webp", alt: t("work.6.img.alt"), caption: t("work.6.img.cap") }}
-          >
-            <p>{t("work.6.p1")}</p>
-          </Block>
-
-          <Block
-            figure="2.4"
-            accent="blue"
-            meta={t("work.0.meta")}
-            title={t("work.0.title")}
-          >
-            <p>{t("work.0.p1")}</p>
-          </Block>
-
-          <Block
-            figure="2.5"
-            accent="purple"
-            meta={t("work.7.meta")}
-            title={t("work.7.title")}
-            image={{ src: "work/anuma-map.webp", alt: t("work.7.img.alt"), caption: t("work.7.img.cap") }}
-          >
-            <p>{t("work.7.p1")}</p>
-            <p>{t("work.7.p2")}</p>
-          </Block>
-
-          <Block
-            figure="2.6"
-            accent="orange"
-            meta={t("work.8.meta")}
-            title={t("work.8.title")}
-            image={{ src: "work/sortsight-concept.webp", alt: t("work.8.img.alt"), caption: t("work.8.img.cap") }}
-          >
-            <p>{t("work.8.p1")}</p>
-            <p>{t("work.8.p2")}</p>
-          </Block>
-          <Block
-            figure="2.7"
             accent="vermillion"
             meta={t("work.1.meta")}
             title={t("work.1.title")}
@@ -208,7 +159,7 @@ export function Work() {
                 href={thesisUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 border border-rule px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink hover:border-ink hover:text-vermillion focus-visible:outline-2 focus-visible:outline-okabe-blue"
+                className="inline-flex items-center gap-2 border border-rule px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-ink hover:border-ink hover:text-vermillion focus-visible:outline-2 focus-visible:outline-okabe-blue"
               >
                 <span aria-hidden="true" className="inline-block h-[6px] w-[6px] rounded-full" style={{ background: ACCENTS.vermillion }} />
                 {t("work.1.read")} ↗
@@ -217,7 +168,38 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.8"
+            figure="2.3"
+            accent="blue"
+            meta={t("work.6.meta")}
+            title={t("work.6.title")}
+            image={{ src: "work/kspace-2x2.webp", alt: t("work.6.img.alt"), caption: t("work.6.img.cap") }}
+          >
+            <p>{t("work.6.p1")}</p>
+          </Block>
+
+          <Block
+            figure="2.4"
+            accent="purple"
+            meta={t("work.7.meta")}
+            title={t("work.7.title")}
+            image={{ src: "work/anuma-map.webp", alt: t("work.7.img.alt"), caption: t("work.7.img.cap") }}
+          >
+            <p>{t("work.7.p1")}</p>
+            <p>{t("work.7.p2")}</p>
+          </Block>
+
+          <Block
+            figure="2.5"
+            accent="orange"
+            meta={t("work.8.meta")}
+            title={t("work.8.title")}
+            image={{ src: "work/sortsight-concept.webp", alt: t("work.8.img.alt"), caption: t("work.8.img.cap") }}
+          >
+            <p>{t("work.8.p1")}</p>
+            <p>{t("work.8.p2")}</p>
+          </Block>
+          <Block
+            figure="2.6"
             accent="blue"
             meta={t("work.2.meta")}
             title={t("work.2.title")}
@@ -227,7 +209,7 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.9"
+            figure="2.7"
             accent="orange"
             meta={t("work.3.meta")}
             title={t("work.3.title")}
