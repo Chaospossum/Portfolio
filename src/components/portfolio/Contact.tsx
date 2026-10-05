@@ -1,18 +1,19 @@
 import { useT } from "./i18n";
-import { Wrap } from "./lab";
-import { IonPath, RegMark, Ruler } from "./retro";
+import { Wrap, useInView } from "./lab";
+import { IonPath, Lissajous, RegMark, RoseCurve, Ruler, SoftArc } from "./retro";
 
 export function Contact() {
   const t = useT();
   const year = new Date().getFullYear();
+  const { ref, inView } = useInView<HTMLElement>();
   const rows = [
-    { k: t("contact.email"), v: "duqni042@gmail.com", href: "mailto:duqni042@gmail.com" },
-    { k: t("contact.linkedin"), v: "nicole-duque-fernandez", href: "https://www.linkedin.com/in/nicole-duque-fernandez/" },
-    { k: t("contact.github"), v: "Chaospossum", href: "https://github.com/Chaospossum" },
+    { k: t("contact.email"), v: "duqni042@gmail.com", href: "mailto:duqni042@gmail.com", a: 3, b: 2 },
+    { k: t("contact.linkedin"), v: "nicole-duque-fernandez", href: "https://www.linkedin.com/in/nicole-duque-fernandez/", a: 5, b: 4 },
+    { k: t("contact.github"), v: "Chaospossum", href: "https://github.com/Chaospossum", a: 4, b: 3 },
   ];
   return (
     <>
-      <section id="contact" aria-labelledby="contact-heading">
+      <section ref={ref} id="contact" aria-labelledby="contact-heading" className={inView ? "is-in" : ""}>
         <Wrap className="py-14 sm:py-20">
           <div className="grid gap-x-8 gap-y-10 lg:grid-cols-12">
             <div className="lg:col-span-2">
@@ -27,10 +28,17 @@ export function Contact() {
                 <span className="text-signal">{t("contact.title.b")}</span>
               </h2>
               <p className="mt-6 max-w-[44ch] text-[1.1875rem] leading-[1.5]">{t("contact.lede")}</p>
-              <ul className="ruled mt-10 border-y border-rule">
+              <p className="mt-8 flex items-end gap-5">
+                <span className="signature" aria-hidden="true">Nicole</span>
+                <SoftArc className="mb-2 h-6 w-32 sm:w-48" />
+              </p>
+              <ul className="ruled mt-8 border-y border-rule">
                 {rows.map((c) => (
                   <li key={c.k} className="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:items-baseline">
-                    <span className="label-md text-muted-ink">{c.k}</span>
+                    <span className="label-md flex items-center gap-2 text-muted-ink">
+                      <Lissajous className="h-4 w-4" a={c.a} b={c.b} />
+                      {c.k}
+                    </span>
                     <a
                       className="link break-all text-[1.375rem] leading-tight sm:text-[1.75rem]"
                       href={c.href}
@@ -56,7 +64,10 @@ export function Contact() {
             <RegMark className="h-5 w-5 text-signal" />
             Nicole Duque
           </span>
-          <span className="label-md text-muted-ink">Luxembourg</span>
+          <span className="label-md flex items-center gap-3 text-muted-ink">
+            <RoseCurve k={4} className="h-6 w-6" />
+            Luxembourg
+          </span>
           <span className="label-md text-muted-ink">{year}</span>
         </Wrap>
       </footer>
