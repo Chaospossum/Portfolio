@@ -62,11 +62,11 @@ export function Contact() {
         <Wrap className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-6">
           <span className="label-md flex items-center gap-3">
             <RegMark className="h-5 w-5 text-signal" />
-            Nicole Duque
+            {t("foot.place")}
           </span>
           <span className="label-md flex items-center gap-3 text-muted-ink">
             <RoseCurve k={4} className="h-6 w-6" />
-            Luxembourg
+            {t("foot.colophon")}
           </span>
           <span className="label-md text-muted-ink">{year}</span>
         </Wrap>
