@@ -125,17 +125,6 @@ export function Work() {
         <div className="mt-10">
           <Block
             figure="2.1"
-            accent="blue"
-            meta={t("work.0.meta")}
-            title={t("work.0.title")}
-          >
-            <p>{t("work.0.p1")}</p>
-            <p>{t("work.0.p2")}</p>
-            <p>{t("work.0.p3")}</p>
-          </Block>
-
-          <Block
-            figure="2.2"
             accent="green"
             meta={t("work.9.meta")}
             title={t("work.9.title")}
@@ -145,7 +134,7 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.3"
+            figure="2.2"
             accent="vermillion"
             meta={t("work.10.meta")}
             title={t("work.10.title")}
@@ -161,13 +150,22 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.4"
+            figure="2.3"
             accent="blue"
             meta={t("work.6.meta")}
             title={t("work.6.title")}
             image={{ src: "work/kspace.webp", alt: t("work.6.img.alt"), caption: t("work.6.img.cap") }}
           >
             <p>{t("work.6.p1")}</p>
+          </Block>
+
+          <Block
+            figure="2.4"
+            accent="blue"
+            meta={t("work.0.meta")}
+            title={t("work.0.title")}
+          >
+            <p>{t("work.0.p1")}</p>
           </Block>
 
           <Block

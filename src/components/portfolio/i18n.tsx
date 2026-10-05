@@ -67,11 +67,9 @@ const dict: Record<Locale, Record<string, string>> = {
     "work.fig": "FIG.",
     "work.tag": "WORK",
 
-    "work.0.title": "Finding HPV in skin tissue with molecular imaging",
-    "work.0.meta": "STATUS: starting, 2026   METHOD: mass spectrometry imaging, segmentation, SVM classification   SAMPLES: skin tissue sections",
-    "work.0.p1": "My next project asks whether HPV infection leaves a chemical fingerprint in skin tissue that a model can learn to recognise, without staining.",
-    "work.0.p2": "The plan: image thin tissue sections with mass spectrometry imaging, so every pixel holds a full mass spectrum. Then clean the data (peak picking, normalisation, noise reduction), segment the tissue into regions, and train a support vector machine to separate infected from healthy areas.",
-    "work.0.p3": "As in my BSc work, the hard part is being honest about the result: validating against established pathology, testing on samples the model never saw, and checking which molecular signals actually drive each decision.",
+    "work.0.title": "Upcoming research project",
+    "work.0.meta": "STATUS: starting, 2026   AREA: molecular imaging and machine learning",
+    "work.0.p1": "A research project combining molecular imaging of tissue with machine learning is starting this year. More here once there is something to show.",
 
     "work.9.title": "A mass spectrometer beamline, built as a class",
     "work.9.meta": "MSc SKILLS LAB, 2026   SYSTEM: electrospray ion source, vacuum, ion optics, quadrupole mass filter, detector   MY PART: data acquisition",
@@ -246,11 +244,9 @@ const dict: Record<Locale, Record<string, string>> = {
     "work.fig": "FIG.",
     "work.tag": "TRAVAUX",
 
-    "work.0.title": "Détecter le HPV dans la peau par imagerie moléculaire",
-    "work.0.meta": "STATUT : en démarrage, 2026   MÉTHODE : imagerie par spectrométrie de masse, segmentation, classification SVM   ÉCHANTILLONS : coupes de tissu cutané",
-    "work.0.p1": "Mon prochain projet cherche à savoir si une infection au HPV laisse une empreinte chimique dans le tissu cutané qu'un modèle peut apprendre à reconnaître, sans coloration.",
-    "work.0.p2": "Le plan : imager de fines coupes de tissu par spectrométrie de masse, pour que chaque pixel contienne un spectre de masse complet. Ensuite nettoyer les données (sélection des pics, normalisation, réduction du bruit), segmenter le tissu en régions, et entraîner une machine à vecteurs de support à séparer les zones infectées des zones saines.",
-    "work.0.p3": "Comme dans mon travail de licence, le plus difficile est d'être honnête sur le résultat : valider par rapport à la pathologie établie, tester sur des échantillons que le modèle n'a jamais vus, et vérifier quels signaux moléculaires guident réellement chaque décision.",
+    "work.0.title": "Projet de recherche à venir",
+    "work.0.meta": "STATUT : en démarrage, 2026   DOMAINE : imagerie moléculaire et apprentissage automatique",
+    "work.0.p1": "Un projet de recherche associant l'imagerie moléculaire de tissus et l'apprentissage automatique démarre cette année. Plus de détails ici dès qu'il y aura quelque chose à montrer.",
 
     "work.9.title": "Une ligne de spectromètre de masse, construite en classe",
     "work.9.meta": "LABO DE MASTER, 2026   SYSTÈME : source électrospray, vide, optique ionique, filtre de masse quadripolaire, détecteur   MA PARTIE : acquisition de données",
