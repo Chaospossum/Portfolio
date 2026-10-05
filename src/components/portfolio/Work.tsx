@@ -149,27 +149,19 @@ export function Work() {
             accent="vermillion"
             meta={t("work.10.meta")}
             title={t("work.10.title")}
-            image={{ src: "work/daq-board.webp", alt: t("work.10.img.alt"), caption: t("work.10.img.cap") }}
-            docs={[{ href: "work/daq-board-schematic.pdf", label: t("work.doc.schematic") }]}
+            image={{ src: "work/daq-shield.webp", alt: t("work.10.img.alt"), caption: t("work.10.img.cap") }}
+            docs={[
+              { href: "work/daq-board-schematic.pdf", label: t("work.doc.full") },
+              { href: "work/daq-shield-schematic.pdf", label: t("work.doc.shield") },
+            ]}
           >
             <p>{t("work.10.p1")}</p>
             <p>{t("work.10.p2")}</p>
+            <p>{t("work.10.p3")}</p>
           </Block>
 
           <Block
             figure="2.4"
-            accent="orange"
-            meta={t("work.11.meta")}
-            title={t("work.11.title")}
-            image={{ src: "work/daq-shield.webp", alt: t("work.11.img.alt"), caption: t("work.11.img.cap") }}
-            docs={[{ href: "work/daq-shield-schematic.pdf", label: t("work.doc.schematic") }]}
-          >
-            <p>{t("work.11.p1")}</p>
-            <p>{t("work.11.p2")}</p>
-          </Block>
-
-          <Block
-            figure="2.5"
             accent="blue"
             meta={t("work.6.meta")}
             title={t("work.6.title")}
@@ -179,7 +171,7 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.6"
+            figure="2.5"
             accent="purple"
             meta={t("work.7.meta")}
             title={t("work.7.title")}
@@ -190,7 +182,7 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.7"
+            figure="2.6"
             accent="orange"
             meta={t("work.8.meta")}
             title={t("work.8.title")}
@@ -200,7 +192,7 @@ export function Work() {
             <p>{t("work.8.p2")}</p>
           </Block>
           <Block
-            figure="2.8"
+            figure="2.7"
             accent="vermillion"
             meta={t("work.1.meta")}
             title={t("work.1.title")}
@@ -227,7 +219,7 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.9"
+            figure="2.8"
             accent="blue"
             meta={t("work.2.meta")}
             title={t("work.2.title")}
@@ -237,7 +229,7 @@ export function Work() {
           </Block>
 
           <Block
-            figure="2.10"
+            figure="2.9"
             accent="orange"
             meta={t("work.3.meta")}
             title={t("work.3.title")}
