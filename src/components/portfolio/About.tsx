@@ -1,18 +1,21 @@
 import type { CSSProperties } from "react";
 import portraitUrl from "@/assets/portrait.webp";
 import { useT } from "./i18n";
-import { Wrap } from "./lab";
+import { Wrap, useInView } from "./lab";
+import { RoseCurve } from "./retro";
 
 const TV_URL = "https://www.science.lu/de/kandidaten-portrait-staffel-1/take-kandidatin-nicole-duque-im-interview";
 
 /* A solid colour field: ink block, paper type, duotone portrait. */
 export function About() {
   const t = useT();
+  const { ref, inView } = useInView<HTMLElement>();
   return (
     <section
+      ref={ref}
       id="about"
       aria-labelledby="about-heading"
-      className="border-b-2 border-ink bg-field text-field-ink"
+      className={`border-b-2 border-ink bg-field text-field-ink ${inView ? "is-in" : ""}`}
       style={{ "--signal": "var(--field-signal)" } as CSSProperties}
     >
       <Wrap className="py-14 sm:py-20">
@@ -21,6 +24,7 @@ export function About() {
             <span aria-hidden="true" className="numeral block text-[4.5rem] sm:text-[6rem]">
               03
             </span>
+            <RoseCurve k={5} draw className="mt-6 hidden w-28 lg:block" />
           </div>
 
           <div className="lg:col-span-6">

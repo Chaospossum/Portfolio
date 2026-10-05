@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /* Files in /public, resolved against the deploy base path. */
 export const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -88,4 +88,26 @@ export function DocLink({ href, children }: { href: string; children: ReactNode 
       {children} <span aria-hidden="true">↗</span>
     </a>
   );
+}
+
+/** True once the element has scrolled into view (one-shot). SSR-safe. */
+export function useInView<T extends HTMLElement>(margin = "0px 0px -15% 0px") {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: margin }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [margin]);
+  return { ref, inView };
 }

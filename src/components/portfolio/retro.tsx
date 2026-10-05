@@ -137,6 +137,7 @@ export function IonPath({ className = "" }: P) {
     const y = Math.sin(i / 4.2) * amp;
     pts.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`);
   }
+  const d = pts.join(" ");
   return (
     <svg viewBox="-170 -90 340 180" className={className} aria-hidden="true">
       {/* rods: two pairs drawn as long capsules */}
@@ -151,8 +152,8 @@ export function IonPath({ className = "" }: P) {
       {/* ion source */}
       <circle cx="-156" cy="0" r="9" fill="var(--signal)" stroke="var(--ink)" strokeWidth="2" />
       {/* ion trajectory */}
-      <path d={pts.join(" ")} fill="none" stroke="var(--signal)" strokeWidth="2.5" />
-      <circle cx="120" cy={Math.sin(100 / 4.2) * 20} r="3.5" fill="var(--signal)" />
+      <path d={d} fill="none" stroke="var(--signal)" strokeWidth="2.5" />
+      <circle cx="-140" cy="0" r="4" fill="var(--ink)" className="ion" style={{ offsetPath: `path("${d}")` }} />
       {/* detector plate */}
       <path d="M138 -40 v80 h14 v-80 z" fill="var(--ink)" />
       <path d="M152 -14 h12 M152 0 h12 M152 14 h12" stroke="var(--ink)" strokeWidth="2" />
@@ -164,20 +165,32 @@ export function IonPath({ className = "" }: P) {
   );
 }
 
-/** Optics: biconvex lens with rays converging to a focus. */
+/** Optics: biconvex lens with rays converging to a focus; photons ride the rays. */
 export function LensRays({ className = "" }: P) {
   const rays = [-44, -28, -12, 12, 28, 44];
+  const ray = (y: number) => `M-150 ${y} L-2 ${y} L96 0`;
   return (
     <svg viewBox="-150 -70 300 140" className={className} aria-hidden="true">
       <g stroke="var(--ink)" strokeWidth="1.5" fill="none">
         <line x1="-150" y1="0" x2="150" y2="0" strokeDasharray="3 5" />
         {rays.map((y) => (
-          <path key={y} d={`M-150 ${y} L-2 ${y} L96 0`} />
+          <path key={y} d={ray(y)} />
         ))}
         <path d="M-150 0 L96 0" />
       </g>
       <path d="M0 -62 C 22 -40, 22 40, 0 62 C -22 40, -22 -40, 0 -62 z" fill="var(--paper)" stroke="var(--ink)" strokeWidth="2" />
       <circle cx="96" cy="0" r="5" fill="var(--signal)" />
+      {rays.map((y, i) => (
+        <circle
+          key={`p${y}`}
+          cx="-150"
+          cy={y}
+          r="3"
+          fill="var(--signal)"
+          className="photon"
+          style={{ offsetPath: `path("${ray(y)}")`, animationDelay: `${-i * 0.9}s` }}
+        />
+      ))}
       <g stroke="var(--ink)" strokeWidth="1" fill="none">
         <path d="M0 68 v6 M96 68 v6 M0 71 h96" />
       </g>
@@ -221,28 +234,116 @@ export function BoardDrawing({ className = "" }: P) {
   );
 }
 
-/** Signal line: a clean sine that becomes noisy, for the thesis entry. */
+/** Signal line: a sine that degrades into noise and recovers, scrolling slowly. */
 export function Waveform({ className = "" }: P) {
-  const pts: string[] = [];
+  const N = 160; // samples per period (320 units)
   let seed = 7;
   const rnd = () => {
     seed = (seed * 9301 + 49297) % 233280;
     return seed / 233280 - 0.5;
   };
-  for (let i = 0; i <= 160; i++) {
-    const x = i * 2;
-    const noise = (i / 160) ** 2 * 26 * rnd();
-    const y = Math.sin(i / 6) * 22 + noise;
-    pts.push(`${i === 0 ? "M" : "L"}${x},${y.toFixed(1)}`);
+  const period: number[] = [];
+  for (let i = 0; i < N; i++) {
+    const env = Math.sin((Math.PI * i) / N) ** 2; // zero at both ends, so the loop is seamless
+    period.push(Math.sin(i / 6.366) * 22 + env * 28 * rnd());
+  }
+  const pts: string[] = [];
+  for (let i = 0; i <= 2 * N; i++) {
+    pts.push(`${i === 0 ? "M" : "L"}${i * 2},${period[i % N].toFixed(1)}`);
   }
   return (
     <svg viewBox="-6 -48 332 96" className={className} aria-hidden="true">
+      <defs>
+        <clipPath id="wave-clip">
+          <rect x="0" y="-48" width="320" height="96" />
+        </clipPath>
+      </defs>
       <g stroke="var(--ink)" strokeWidth="1" fill="none">
         <line x1="0" y1="0" x2="320" y2="0" strokeDasharray="3 5" />
         <line x1="0" y1="-40" x2="0" y2="40" />
         <line x1="160" y1="-40" x2="160" y2="40" strokeDasharray="3 5" />
       </g>
-      <path d={pts.join(" ")} fill="none" stroke="var(--signal)" strokeWidth="2" />
+      <g clipPath="url(#wave-clip)">
+        <path d={pts.join(" ")} fill="none" stroke="var(--signal)" strokeWidth="2" className="wave-scroll" />
+      </g>
+    </svg>
+  );
+}
+
+/** Airy disk: the diffraction pattern of a point of light, breathing slowly. */
+export function AiryDisk({ className = "" }: P) {
+  const rings = [
+    { r: 26, w: 7, o: 0.55 },
+    { r: 42, w: 4, o: 0.35 },
+    { r: 56, w: 3, o: 0.22 },
+    { r: 69, w: 2, o: 0.14 },
+  ];
+  return (
+    <svg viewBox="-80 -80 160 160" className={className} aria-hidden="true">
+      <g className="breathe">
+        <circle r="13" fill="var(--signal)" />
+        {rings.map((k) => (
+          <circle key={k.r} r={k.r} fill="none" stroke="var(--signal)" strokeWidth={k.w} opacity={k.o} />
+        ))}
+      </g>
+      <g stroke="var(--ink)" strokeWidth="1" fill="none">
+        <path d="M-78 0 h10 M68 0 h10 M0 -78 v10 M0 68 v10" />
+      </g>
+    </svg>
+  );
+}
+
+/* Rose curve r = cos(k·θ) sampled into a polyline, plus its length for stroke-drawing. */
+function rose(k: number, R: number, n = 720) {
+  const pts: [number, number][] = [];
+  const turns = k % 2 === 0 ? 2 : 1;
+  for (let i = 0; i <= n; i++) {
+    const th = (i / n) * Math.PI * turns;
+    const r = R * Math.cos(k * th);
+    pts.push([r * Math.cos(th), r * Math.sin(th)]);
+  }
+  let len = 0;
+  for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+  return { d: pts.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" "), len };
+}
+
+/** Botanical ornament from maths: a rose curve in fine blush linework. */
+export function RoseCurve({ className = "", k = 5, draw = false }: P & { k?: number; draw?: boolean }) {
+  const { d, len } = rose(k, 70);
+  return (
+    <svg viewBox="-76 -76 152 152" className={className} aria-hidden="true">
+      <path
+        d={d}
+        fill="none"
+        stroke="var(--blush)"
+        strokeWidth="1.2"
+        className={draw ? "draw-in" : undefined}
+        style={draw ? { strokeDasharray: len, ["--len" as string]: len } : undefined}
+      />
+      <circle r="2.5" fill="var(--blush)" />
+    </svg>
+  );
+}
+
+/** Small Lissajous flower, used as a bullet. */
+export function Lissajous({ className = "", a = 3, b = 2 }: P & { a?: number; b?: number }) {
+  const pts: string[] = [];
+  for (let i = 0; i <= 400; i++) {
+    const t = (i / 400) * Math.PI * 2;
+    pts.push(`${i ? "L" : "M"}${(9 * Math.sin(a * t + Math.PI / 2)).toFixed(2)} ${(9 * Math.sin(b * t)).toFixed(2)}`);
+  }
+  return (
+    <svg viewBox="-11 -11 22 22" className={className} aria-hidden="true">
+      <path d={pts.join(" ")} fill="none" stroke="var(--blush)" strokeWidth="0.9" />
+    </svg>
+  );
+}
+
+/** A soft hairline arc, to breathe between hard rules. */
+export function SoftArc({ className = "" }: P) {
+  return (
+    <svg viewBox="0 0 400 24" preserveAspectRatio="none" className={className} aria-hidden="true">
+      <path d="M0 22 C 120 -6, 280 -6, 400 22" fill="none" stroke="var(--blush)" strokeWidth="1.2" vectorEffect="non-scaling-stroke" />
     </svg>
   );
 }

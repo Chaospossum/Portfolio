@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import portraitUrl from "@/assets/portrait.webp";
 import { useT } from "./i18n";
 import { Wrap } from "./lab";
+import { AiryDisk } from "./retro";
 
 type Degradation = "Blur" | "Noise" | "Compression" | "Lighting";
 type Training = "No augmentation" | "Mixed augmentation";
@@ -161,6 +162,7 @@ export function ResearchPanel() {
             <p className="label-md mt-4">{t("panel.plate")}</p>
             <p className="mt-6 max-w-[30ch] text-[1.375rem] leading-[1.35] italic">{t("panel.lede")}</p>
             <p className="mt-6 max-w-[38ch] text-base leading-snug text-muted-ink">{t("panel.note")}</p>
+            <AiryDisk className="mt-8 w-32 lg:mt-12 lg:w-40" />
           </div>
 
           {/* sample plate */}
