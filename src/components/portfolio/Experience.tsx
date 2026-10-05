@@ -35,7 +35,7 @@ function List({ rows }: { rows: Row[] }) {
 
 export function Experience() {
   const t = useT();
-  const experience: Row[] = ["e1", "e2", "e3", "e4", "e5", "e6"].map((k) => ({
+  const experience: Row[] = ["e1", "e3", "e4", "e5", "e6"].map((k) => ({
     date: t(`exp.${k}.date`),
     title: t(`exp.${k}.title`),
     org: t(`exp.${k}.org`),
