@@ -85,11 +85,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://chaospossum.github.io/Portfolio/" },
       { property: "og:site_name", content: "Nicole Duque - Imaging Engineering" },
-      { property: "og:image", content: "https://chaospossum.github.io/Portfolio/og-card-2026.png" },
+      { property: "og:image", content: "https://chaospossum.github.io/Portfolio/og-card-v3.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://chaospossum.github.io/Portfolio/og-card-2026.png" },
+      { name: "twitter:image", content: "https://chaospossum.github.io/Portfolio/og-card-v3.png" },
     ],
     links: [
       {
