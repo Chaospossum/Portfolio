@@ -1,73 +1,49 @@
-import { ACCENTS } from "./lab";
 import { useT } from "./i18n";
+import { Wrap } from "./lab";
+import { HalftoneSun, Ruler } from "./retro";
 
 export function Masthead() {
   const t = useT();
-  const KICKER = [
-    { word: t("mast.kicker.1"), color: ACCENTS.vermillion },
-    { word: t("mast.kicker.2"), color: ACCENTS.blue },
-    { word: t("mast.kicker.3"), color: ACCENTS.green },
-    { word: t("mast.kicker.4"), color: ACCENTS.orange },
-  ];
+  const kickers = [t("mast.kicker.1"), t("mast.kicker.2"), t("mast.kicker.3"), t("mast.kicker.4")];
   return (
-    <section id="top" className="relative overflow-hidden border-b border-rule">
-      <div
-        aria-hidden="true"
-        className="lab-grid lab-grid-fade pointer-events-none absolute inset-0 opacity-40"
-      />
-      <div className="relative mx-auto max-w-[960px] px-5 pt-12 pb-14 sm:px-8 sm:pt-16 sm:pb-20">
-        {/* Plate stamp, top row */}
-        <div className="flex items-baseline justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-ink">
-          <span className="flex items-center gap-2 text-ink">
-            <span
-              aria-hidden="true"
-              className="inline-block h-[7px] w-[7px] rounded-full"
-              style={{ background: ACCENTS.vermillion }}
-            />
-              {t("mast.plate")}
-          </span>
-          <span className="hidden sm:inline">N. DUQUE — 2026</span>
+    <section id="top" className="relative overflow-hidden border-b-2 border-ink">
+      <Wrap>
+        <div className="grid gap-x-8 pt-8 lg:grid-cols-12 lg:pt-14">
+          {/* rotated side label, desktop only */}
+          <div className="hidden lg:col-span-1 lg:flex lg:items-end lg:pb-2">
+            <span className="vert label-md text-muted-ink">{t("mast.plate")}</span>
+          </div>
+
+          {/* planet: first on phones so it sits above the name, bleeding right */}
+          <div className="-mr-10 ml-auto w-[68%] max-w-[360px] sm:-mr-16 sm:w-[52%] lg:order-2 lg:col-span-5 lg:mr-0 lg:w-full lg:max-w-none lg:self-center">
+            <HalftoneSun className="block w-full" />
+          </div>
+
+          <div className="lg:order-1 lg:col-span-6 lg:self-center">
+            <h1 className="font-display uppercase leading-[0.98] text-[clamp(2.5rem,8.1vw,7.25rem)]">
+              <span className="block">Nicole</span>
+              <span className="block text-signal">Duque</span>
+            </h1>
+            <p className="mt-8 max-w-[44ch] text-[1.25rem] leading-[1.45] sm:text-[1.375rem]">{t("mast.intro")}</p>
+            <a href="#contact" className="link mt-7 inline-block text-[1.125rem] italic">
+              {t("mast.available")} <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
 
-        {/* Ticker kicker with colored bullets */}
-        <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
-          {KICKER.map((k) => (
-            <li key={k.word} className="flex items-center gap-2">
-              <span
-                aria-hidden="true"
-                className="inline-block h-[6px] w-[6px] rounded-full"
-                style={{ background: k.color }}
-              />
-              {k.word}
+        {/* index strip: four numbered fields, like a mission patch legend */}
+        <ol className="mt-12 grid grid-cols-2 gap-x-6 border-t-2 border-ink lg:mt-16 lg:grid-cols-4">
+          {kickers.map((k, i) => (
+            <li key={k} className="border-b border-rule py-4 lg:border-b-0">
+              <span aria-hidden="true" className="numeral block text-[1.75rem]">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="label-md mt-3 block text-ink">{k}</span>
             </li>
           ))}
-        </ul>
-
-        {/* Name: mixed weight, last word italic for typographic tension */}
-        <h1 className="mt-8 font-display leading-[0.92] tracking-[-0.025em] text-ink">
-          <span className="block text-[3rem] font-light sm:text-[5rem]">Nicole</span>
-          <span className="block text-[3.75rem] font-black italic sm:text-[7rem]">
-            Duque<span style={{ color: ACCENTS.vermillion }}>.</span>
-          </span>
-        </h1>
-
-        <div className="mt-10 grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
-          <p className="max-w-[58ch] font-body text-base leading-relaxed text-ink sm:text-lg">
-            {t("mast.intro")}
-          </p>
-          <a
-            href="#contact"
-            className="flex shrink-0 items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-ink underline decoration-rule underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-okabe-blue"
-          >
-            <span
-              aria-hidden="true"
-              className="inline-block h-[6px] w-[6px] rounded-full"
-              style={{ background: ACCENTS.green }}
-            />
-            <span>{t("mast.available")}</span>
-          </a>
-        </div>
-      </div>
+        </ol>
+      </Wrap>
+      <Ruler units={120} className="mt-2 text-ink" />
     </section>
   );
 }

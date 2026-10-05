@@ -25,7 +25,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "nav.theme.dark": "Dark",
     "nav.lang": "Language",
 
-    "mast.plate": "PLATE 00 / MASTHEAD",
+    "mast.plate": "Imaging engineering",
     "mast.kicker.1": "IMAGING ENGINEERING MSc",
     "mast.kicker.2": "MOLECULAR IMAGING",
     "mast.kicker.3": "INSTRUMENTATION & HARDWARE",
@@ -61,7 +61,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "panel.field.training": "TRAINING",
     "panel.note": "Illustrative curves based on my BSc thesis (ResNet-18, CIFAR-10). The no-augmentation floors are the measured severity-3 results; the mixed curve is approximate. Not a running model.",
 
-    "work.plate": "PLATE 02 / WORK",
+    "work.plate": "Work",
     "work.title.a": "Selected",
     "work.title.b": "projects",
     "work.fig": "FIG.",
@@ -122,14 +122,14 @@ const dict: Record<Locale, Record<string, string>> = {
     "work.3.p2": "Earlier, as a summer intern, I built combat robots for live competitions and a smart decorative plant with automated IoT irrigation.",
 
 
-    "about.plate": "PLATE 03 / ABOUT",
+    "about.plate": "About",
     "about.title": "About",
     "about.p1": "I am a Luxembourgish physicist doing an MSc in Imaging Engineering at Maastricht University, working across data and AI and instrumentation, after a BSc in Physics and Mathematics at University College Maastricht. Alongside my studies I am a selected participant in the AI Academy at the Digital Learning Hub in Luxembourg, and a new imaging research project starts this year.",
     "about.p2": "I like problems that need both careful maths and something built with my hands, and I do my best work in iterative, experimental places like makerspaces and labs.",
     "about.langs": "LANGUAGES: LUXEMBOURGISH (NATIVE), FRENCH, GERMAN, ENGLISH, SPANISH, ITALIAN",
     "about.tv.a": "Fun fact: I was on TV. I competed in season one of Take Off, Luxembourg's national science challenge show on RTL. ",
     "about.tv.link": "Here is my interview",
-    "exp.plate": "PLATE 04 / EXPERIENCE & EDUCATION",
+    "exp.plate": "Experience & education",
     "exp.title.a": "Experience and",
     "exp.title.b": "education",
     "exp.experience": "EXPERIENCE",
@@ -177,7 +177,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "exp.cert4link": "Take Off season one",
     "exp.cert4b": ", national science challenge show, RTL Luxembourg.",
 
-    "contact.plate": "PLATE 05 / CONTACT",
+    "contact.plate": "Contact",
     "contact.title.a": "Get in",
     "contact.title.b": "touch",
     "contact.lede": "Open to research, imaging and engineering collaboration. Email is the quickest way to reach me.",
@@ -196,7 +196,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "nav.theme.dark": "Sombre",
     "nav.lang": "Langue",
 
-    "mast.plate": "PLANCHE 00 / EN-TÊTE",
+    "mast.plate": "Ingénierie d'imagerie",
     "mast.kicker.1": "MASTER INGÉNIERIE D'IMAGERIE",
     "mast.kicker.2": "IMAGERIE MOLÉCULAIRE",
     "mast.kicker.3": "INSTRUMENTATION & MATÉRIEL",
@@ -232,7 +232,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "panel.field.training": "ENTRAÎNEMENT",
     "panel.note": "Courbes illustratives basées sur mon mémoire de licence (ResNet-18, CIFAR-10). Les planchers sans augmentation sont les résultats mesurés au niveau de sévérité 3 ; la courbe mixte est approximative. Pas un modèle en exécution.",
 
-    "work.plate": "PLANCHE 02 / TRAVAUX",
+    "work.plate": "Travaux",
     "work.title.a": "Projets",
     "work.title.b": "sélectionnés",
     "work.fig": "FIG.",
@@ -293,7 +293,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "work.3.p2": "Auparavant, en stage d'été, j'ai construit des robots de combat pour des compétitions et une plante décorative connectée avec irrigation IoT automatisée.",
 
 
-    "about.plate": "PLANCHE 03 / À PROPOS",
+    "about.plate": "À propos",
     "about.title": "À propos",
     "about.p1": "Je suis une physicienne luxembourgeoise en master d'Ingénierie d'Imagerie à l'Université de Maastricht, entre données et IA et instrumentation, après une licence en Physique et Mathématiques à University College Maastricht. En parallèle, je suis participante sélectionnée à l'AI Academy du Digital Learning Hub au Luxembourg, et un nouveau projet de recherche en imagerie démarre cette année.",
     "about.p2": "J'aime les problèmes qui demandent à la fois des maths rigoureuses et quelque chose à construire de mes mains, et je travaille mieux dans des lieux itératifs et expérimentaux comme les makerspaces et les laboratoires.",
@@ -301,7 +301,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "about.tv.a": "Anecdote : je suis passée à la télé. J'ai participé à la première saison de Take Off, l'émission scientifique nationale du Luxembourg sur RTL. ",
     "about.tv.link": "Voici mon interview",
 
-    "exp.plate": "PLANCHE 04 / PARCOURS & FORMATION",
+    "exp.plate": "Parcours & formation",
     "exp.title.a": "Parcours et",
     "exp.title.b": "formation",
     "exp.experience": "EXPÉRIENCE",
@@ -349,7 +349,7 @@ const dict: Record<Locale, Record<string, string>> = {
     "exp.cert4link": "Take Off saison une",
     "exp.cert4b": ", émission scientifique nationale, RTL Luxembourg.",
 
-    "contact.plate": "PLANCHE 05 / CONTACT",
+    "contact.plate": "Contact",
     "contact.title.a": "Prenons",
     "contact.title.b": "contact",
     "contact.lede": "Ouverte aux collaborations en recherche, imagerie et ingénierie. Le courriel est le moyen le plus rapide de me joindre.",

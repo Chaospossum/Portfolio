@@ -5,35 +5,19 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: "Michroma", "Eurostile", "Arial Black", ui-sans-serif, sans-serif;
+  --font-body: "Newsreader", "Iowan Old Style", Georgia, serif;
 }
-
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
 
 @theme inline {
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-muted-ink: var(--muted-ink);
   --color-rule: var(--rule);
-  --color-vermillion: var(--vermillion);
-  --color-okabe-blue: var(--okabe-blue);
-  --color-okabe-green: var(--okabe-green);
-  --color-okabe-orange: var(--okabe-orange);
-  --color-okabe-purple: var(--okabe-purple);
+  --color-signal: var(--signal);
+  --color-field: var(--field);
+  --color-field-ink: var(--field-ink);
+  --color-field-signal: var(--field-signal);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -78,15 +62,16 @@
 
 :root {
   --radius: 0.625rem;
-  --paper: #F6F7F4;
-  --ink: #15140F;
-  --muted-ink: #6B6E66;
-  --rule: #D7D9D2;
-  --vermillion: #D55E00;
-  --okabe-blue: #0072B2;
-  --okabe-green: #009E73;
-  --okabe-orange: #E69F00;
-  --okabe-purple: #CC79A7;
+  /* Two inks on warm paper: ink blue + signal red-orange. */
+  --paper: #F2EBDB;
+  --ink: #1B2440;
+  --muted-ink: #4A5068;
+  --rule: #C9C0AC;
+  --signal: #C93C14;
+  /* Solid colour field (About): ink block with paper type on it. */
+  --field: #1B2440;
+  --field-ink: #EFE7D5;
+  --field-signal: #FF7A45;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
@@ -122,15 +107,14 @@
 }
 
 .dark {
-  --paper: #0E0F0C;
-  --ink: #F2F1EC;
-  --muted-ink: #8E908A;
-  --rule: #2A2C28;
-  --vermillion: #FF8A3D;
-  --okabe-blue: #4FB3FF;
-  --okabe-green: #4DD7A8;
-  --okabe-orange: #FFC247;
-  --okabe-purple: #E89BC5;
+  --paper: #141A2E;
+  --ink: #EFE7D5;
+  --muted-ink: #A9ADBF;
+  --rule: #3A4160;
+  --signal: #FF7A45;
+  --field: #EFE7D5;
+  --field-ink: #141A2E;
+  --field-signal: #C93C14;
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(0.208 0.042 265.755);
@@ -177,15 +161,15 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  /* Bump the base size so body copy and headings read a bit larger across the
-     whole site (16px default -> 18px). rem-based sizes scale proportionally. */
-  font-size: 112.5%;
+  scroll-behavior: auto;
+  font-size: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   * {
     transition: none !important;
     animation: none !important;
@@ -194,6 +178,16 @@ html {
 
 body {
   font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.5;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--paper);
 }
 
 .font-display {
@@ -202,19 +196,192 @@ body {
 .font-body {
   font-family: var(--font-body);
 }
-.font-mono {
-  font-family: var(--font-mono);
+
+/* ---------- Print idiom ---------- */
+
+/* Wide lettering for small specimen labels: Michroma is already extended,
+   so no extra tracking. Never below 11px. */
+.label {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.label-md {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
-/* Hairline grid backdrop, like graph paper for a lab notebook. */
-.lab-grid {
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--color-rule) 60%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--color-rule) 60%, transparent) 1px, transparent 1px);
-  background-size: 32px 32px;
+/* Section numeral: a big flat-ink figure, like a plate number. */
+.numeral {
+  font-family: var(--font-display);
+  line-height: 0.85;
+  color: var(--signal);
+  font-variant-numeric: tabular-nums;
+}
+.numeral-ink {
+  color: var(--ink);
 }
 
-.lab-grid-fade {
-  -webkit-mask-image: radial-gradient(ellipse at top, #000 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse at top, #000 30%, transparent 75%);
+/* Riso misregistration on hover: the orange "second pass" shifts a little. */
+.plate {
+  position: relative;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 10px 10px 0 0 var(--signal);
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+.plate:hover {
+  box-shadow: 6px 6px 0 0 var(--signal);
+  transform: translate(2px, 2px);
+}
+.plate img,
+.plate canvas {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+/* Printed-photo feel on paper: a warm, slightly flattened reproduction. */
+.plate img {
+  filter: sepia(0.14) contrast(1.04);
+}
+.dark .plate img {
+  filter: contrast(1.02);
+}
+
+/* Duotone portrait: ink + paper on the colour field. */
+.duotone {
+  filter: grayscale(1) contrast(1.12) brightness(0.98);
+  mix-blend-mode: screen;
+}
+.dark .duotone {
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.1);
+}
+
+/* Halftone dot tint via CSS, used as a texture band. */
+.halftone {
+  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.3px);
+  background-size: 7px 7px;
+  opacity: 0.35;
+}
+
+/* Hairline-ruled rows (specimen tables). */
+.ruled > * + * {
+  border-top: 1px solid var(--rule);
+}
+
+/* Links: ink text, signal underline that thickens on hover. */
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-thickness 120ms ease, color 120ms ease;
+}
+.link:hover {
+  color: var(--signal);
+  text-decoration-thickness: 3px;
+}
+
+.link-quiet {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 120ms ease, color 120ms ease;
+}
+.link-quiet:hover {
+  color: var(--signal);
+  text-decoration-color: var(--signal);
+}
+
+/* Fieldsets refuse to shrink below their content by default. */
+fieldset {
+  min-inline-size: 0;
+}
+
+/* Visible focus, everywhere. */
+:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+}
+
+/* Instrument slider: ruler track, square orange knob. */
+.ruler-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background:
+    repeating-linear-gradient(to right, var(--ink) 0 1px, transparent 1px 10%) 0 100% / 100% 10px no-repeat,
+    repeating-linear-gradient(to right, var(--rule) 0 1px, transparent 1px 2%) 0 100% / 100% 5px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) 0 13px / 100% 2px no-repeat;
+  cursor: pointer;
+}
+.ruler-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--signal);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  margin-top: -14px;
+}
+.ruler-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--signal);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+}
+.ruler-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+.ruler-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+/* Instrument buttons: square, ink border, filled when pressed. */
+.key {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  line-height: 1.2;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  transition: background 120ms ease, color 120ms ease;
+}
+.key:hover {
+  background: color-mix(in oklab, var(--ink) 10%, transparent);
+}
+.key[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* The one motion on the page: a satellite on its orbit. */
+@keyframes orbit {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+.orbit-anim {
+  offset-rotate: 0deg;
+  animation: orbit 40s linear infinite;
+}
+
+/* Vertical side label (desktop). */
+.vert {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }

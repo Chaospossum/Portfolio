@@ -1,63 +1,64 @@
-import { ACCENTS } from "./lab";
 import { useT } from "./i18n";
+import { Wrap } from "./lab";
+import { IonPath, RegMark, Ruler } from "./retro";
 
 export function Contact() {
   const t = useT();
   const year = new Date().getFullYear();
+  const rows = [
+    { k: t("contact.email"), v: "duqni042@gmail.com", href: "mailto:duqni042@gmail.com" },
+    { k: t("contact.linkedin"), v: "nicole-duque-fernandez", href: "https://www.linkedin.com/in/nicole-duque-fernandez/" },
+    { k: t("contact.github"), v: "Chaospossum", href: "https://github.com/Chaospossum" },
+  ];
   return (
     <>
       <section id="contact" aria-labelledby="contact-heading">
-        <div className="mx-auto max-w-[960px] px-5 py-16 sm:px-8 sm:py-20">
-          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
-            <span
-              aria-hidden="true"
-              className="inline-block h-[7px] w-[7px] rounded-full"
-              style={{ background: ACCENTS.orange }}
-            />
-            {t("contact.plate")}
+        <Wrap className="py-14 sm:py-20">
+          <div className="grid gap-x-8 gap-y-10 lg:grid-cols-12">
+            <div className="lg:col-span-2">
+              <span aria-hidden="true" className="numeral block text-[4.5rem] sm:text-[6rem]">
+                05
+              </span>
+            </div>
+            <div className="lg:col-span-6">
+              <h2 id="contact-heading" className="font-display text-[2rem] uppercase leading-[1.02] sm:text-[3.25rem]">
+                {t("contact.title.a")}
+                <br />
+                <span className="text-signal">{t("contact.title.b")}</span>
+              </h2>
+              <p className="mt-6 max-w-[44ch] text-[1.1875rem] leading-[1.5]">{t("contact.lede")}</p>
+              <ul className="ruled mt-10 border-y border-rule">
+                {rows.map((c) => (
+                  <li key={c.k} className="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:items-baseline">
+                    <span className="label-md text-muted-ink">{c.k}</span>
+                    <a
+                      className="link break-all text-[1.375rem] leading-tight sm:text-[1.75rem]"
+                      href={c.href}
+                      target={c.href.startsWith("http") ? "_blank" : undefined}
+                      rel="noreferrer"
+                    >
+                      {c.v}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:col-span-4 lg:self-end">
+              <IonPath className="w-full max-w-[420px] lg:ml-auto" />
+            </div>
           </div>
-          <h2
-            id="contact-heading"
-            className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl"
-          >
-            {t("contact.title.a")} <span className="italic" style={{ color: ACCENTS.orange }}>{t("contact.title.b")}</span>
-          </h2>
-          <p className="mt-6 max-w-[62ch] font-body text-base leading-relaxed text-ink">
-            {t("contact.lede")}
-          </p>
-          <ul className="mt-8 grid gap-3 font-mono text-sm sm:grid-cols-3">
-            {[
-              { k: t("contact.email"), v: "duqni042@gmail.com", href: "mailto:duqni042@gmail.com" },
-              {
-                k: t("contact.linkedin"),
-                v: "nicole-duque-fernandez",
-                href: "https://www.linkedin.com/in/nicole-duque-fernandez/",
-              },
-              { k: t("contact.github"), v: "Chaospossum", href: "https://github.com/Chaospossum" },
-            ].map((c) => (
-              <li key={c.k} className="border border-rule p-4">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-muted-ink">
-                  {c.k}
-                </p>
-                <a
-                  className="mt-2 block break-all text-ink underline decoration-rule underline-offset-2 hover:decoration-okabe-blue hover:text-okabe-blue focus-visible:outline-2 focus-visible:outline-okabe-blue"
-                  href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : undefined}
-                  rel="noreferrer"
-                >
-                  {c.v}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        </Wrap>
       </section>
-      <footer className="border-t border-rule">
-        <div className="mx-auto flex max-w-[960px] flex-col items-start justify-between gap-2 px-5 py-8 font-mono text-xs uppercase tracking-[0.18em] text-muted-ink sm:flex-row sm:px-8">
-          <span>NICOLE DUQUE</span>
-          <span>LUXEMBOURG</span>
-          <span>{year}</span>
-        </div>
+      <footer className="border-t-2 border-ink">
+        <Ruler units={120} className="text-ink" />
+        <Wrap className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-6">
+          <span className="label-md flex items-center gap-3">
+            <RegMark className="h-5 w-5 text-signal" />
+            Nicole Duque
+          </span>
+          <span className="label-md text-muted-ink">Luxembourg</span>
+          <span className="label-md text-muted-ink">{year}</span>
+        </Wrap>
       </footer>
     </>
   );
