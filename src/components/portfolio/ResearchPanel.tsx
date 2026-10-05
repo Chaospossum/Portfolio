@@ -1,19 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import portraitUrl from "@/assets/portrait.webp";
-import { ACCENTS, Plate } from "./lab";
 import { useT } from "./i18n";
+import { Wrap } from "./lab";
 
 type Degradation = "Blur" | "Noise" | "Compression" | "Lighting";
 type Training = "No augmentation" | "Mixed augmentation";
 
 const TYPES: Degradation[] = ["Blur", "Noise", "Compression", "Lighting"];
-
-const DEG_COLOR: Record<Degradation, string> = {
-  Blur: ACCENTS.blue,
-  Noise: ACCENTS.vermillion,
-  Compression: ACCENTS.orange,
-  Lighting: ACCENTS.purple,
-};
 
 function sigmoid(x: number) {
   return 1 / (1 + Math.exp(-x));
@@ -43,6 +36,28 @@ function useImage(src: string) {
     i.onload = () => setImg(i);
   }, [src]);
   return img;
+}
+
+/* Horizontal meter: 0–100 with ticks, filled in signal ink. */
+function Meter({ value }: { value: number }) {
+  return (
+    <svg viewBox="0 0 300 30" className="block w-full" aria-hidden="true">
+      <rect x="0" y="4" width="300" height="12" fill="none" stroke="var(--ink)" strokeWidth="1.5" />
+      <rect
+        x="0"
+        y="4"
+        width={(value / 100) * 300}
+        height="12"
+        fill="var(--signal)"
+        style={{ transition: "width 320ms ease-out" }}
+      />
+      <g stroke="var(--ink)" strokeWidth="1">
+        {Array.from({ length: 21 }, (_, i) => (
+          <line key={i} x1={i * 15} y1="18" x2={i * 15} y2={i % 5 === 0 ? 28 : 23} />
+        ))}
+      </g>
+    </svg>
+  );
 }
 
 export function ResearchPanel() {
@@ -128,92 +143,69 @@ export function ResearchPanel() {
 
   const conf = confidence.toFixed(1);
   const low = confidence < 50;
-  const degColor = DEG_COLOR[degradation];
-  const arcLen = 2 * Math.PI * 56;
-  const arcOffset = arcLen * (1 - confidence / 100);
+  const status = low ? t("panel.collapse") : confidence > 80 ? t("panel.stable") : t("panel.degraded");
 
   return (
-    <section className="border-b border-rule" aria-labelledby="panel-heading">
-      <div className="mx-auto max-w-[960px] px-5 py-12 sm:px-8 sm:py-16">
+    <section className="border-b-2 border-ink" aria-labelledby="panel-heading">
+      <Wrap className="py-14 sm:py-20">
         <h2 id="panel-heading" className="sr-only">
           Interactive thesis demo
         </h2>
-        <Plate number="01" label={t("panel.plate")} accent="blue" caption={t("panel.caption")} />
-        <p className="mt-3 font-body text-base text-ink">{t("panel.lede")}</p>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1fr]">
-          {/* Image */}
-            <div
-              className="self-start border-2 bg-paper transition-colors duration-300"
-              style={{ borderColor: degColor }}
-            >
+        <div className="grid min-w-0 grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-12">
+          {/* heading column */}
+          <div className="min-w-0 lg:col-span-4">
+            <span aria-hidden="true" className="numeral block text-[4.5rem] sm:text-[6rem]">
+              01
+            </span>
+            <p className="label-md mt-4">{t("panel.plate")}</p>
+            <p className="mt-6 max-w-[30ch] text-[1.375rem] leading-[1.35] italic">{t("panel.lede")}</p>
+            <p className="mt-6 max-w-[38ch] text-base leading-snug text-muted-ink">{t("panel.note")}</p>
+          </div>
+
+          {/* sample plate */}
+          <div className="min-w-0 lg:col-span-4">
+            <div className="plate min-w-0">
               <canvas
                 ref={canvasRef}
-                className="block aspect-square w-full"
+                className="block aspect-square w-full max-w-full"
                 aria-label="Sample image with the selected degradation applied"
               />
-              <div
-                className="flex items-center justify-between border-t px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-ink"
-                style={{ borderColor: degColor }}
-              >
-                <span className="flex items-center gap-2">
-                  <span
-                    aria-hidden="true"
-                    className="inline-block h-[6px] w-[6px] rounded-full"
-                    style={{ background: degColor }}
-                  />
-                  {t("panel.sample")}
-                </span>
-                <span>{DEG_LABEL[degradation].toUpperCase()} · S={severity.toString().padStart(3, "0")}</span>
-              </div>
-              <p className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-ink">
-                {t("panel.thisisme")}
+            </div>
+            <div className="mt-5 flex items-baseline justify-between gap-3">
+              <p className="text-base italic text-muted-ink">
+                {t("panel.caption")}. {t("panel.thisisme")}
+              </p>
+              <p className="label text-ink">
+                {DEG_LABEL[degradation]} · S={severity.toString().padStart(3, "0")}
               </p>
             </div>
+          </div>
 
-          {/* Right column */}
-          <div className="flex flex-col gap-6">
-            {/* Controls */}
-            <div className="border border-rule p-5">
-              <fieldset>
-                <legend className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-ink">
-                  {t("panel.degradation")}
-                </legend>
-                <div className="mt-3 grid grid-cols-2 gap-2">
-                  {TYPES.map((t) => {
-                    const active = t === degradation;
-                    const c = DEG_COLOR[t];
-                    return (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => setDegradation(t)}
-                        aria-pressed={active}
-                        className={`flex items-center gap-2 border px-3 py-2 text-left font-mono text-xs uppercase tracking-[0.12em] focus-visible:outline-2 focus-visible:outline-okabe-blue ${
-                          active
-                            ? "border-ink bg-ink text-paper"
-                            : "border-rule bg-paper text-ink hover:border-ink"
-                        }`}
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="inline-block h-[6px] w-[6px] rounded-full"
-                          style={{ background: c }}
-                        />
-                        {DEG_LABEL[t]}
-                      </button>
-                    );
-                  })}
+          {/* instrument panel */}
+          <div className="min-w-0 lg:col-span-4">
+            <div className="border-2 border-ink">
+              <fieldset className="border-b border-ink p-4">
+                <legend className="label-md float-left mb-3 w-full text-muted-ink">{t("panel.degradation")}</legend>
+                <div className="clear-both grid grid-cols-2 gap-2">
+                  {TYPES.map((d) => (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => setDegradation(d)}
+                      aria-pressed={d === degradation}
+                      className="key"
+                    >
+                      {DEG_LABEL[d]}
+                    </button>
+                  ))}
                 </div>
               </fieldset>
 
-              <div className="mt-6">
-                <label
-                  htmlFor="severity"
-                  className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-muted-ink"
-                >
+              <div className="border-b border-ink p-4">
+                <label htmlFor="severity" className="label-md flex items-center justify-between text-muted-ink">
                   <span>{t("panel.severity")}</span>
-                  <span className="text-ink">{severity}</span>
+                  <span className="font-display text-[1.25rem] text-ink">{severity}</span>
                 </label>
                 <input
                   id="severity"
@@ -222,128 +214,63 @@ export function ResearchPanel() {
                   max={100}
                   value={severity}
                   onChange={(e) => setSeverity(Number(e.target.value))}
-                  className="mt-2 w-full accent-[var(--color-okabe-blue)]"
+                  className="ruler-range mt-2"
                 />
               </div>
 
-              <fieldset className="mt-6">
-                <legend className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-ink">
-                  {t("panel.training")}
-                </legend>
-                <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-                  {(["No augmentation", "Mixed augmentation"] as Training[]).map((opt) => {
-                    const active = opt === training;
-                    return (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setTraining(opt)}
-                        aria-pressed={active}
-                        className={`flex-1 border px-3 py-2 text-left font-mono text-xs uppercase tracking-[0.12em] focus-visible:outline-2 focus-visible:outline-okabe-blue ${
-                          active
-                            ? "border-ink bg-ink text-paper"
-                            : "border-rule bg-paper text-ink hover:border-ink"
-                        }`}
-                      >
-                        {TRAIN_LABEL[opt]}
-                      </button>
-                    );
-                  })}
+              <fieldset className="border-b border-ink p-4">
+                <legend className="label-md float-left mb-3 w-full text-muted-ink">{t("panel.training")}</legend>
+                <div className="clear-both grid grid-cols-2 gap-2">
+                  {(["No augmentation", "Mixed augmentation"] as Training[]).map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => setTraining(opt)}
+                      aria-pressed={opt === training}
+                      className="key"
+                    >
+                      {TRAIN_LABEL[opt]}
+                    </button>
+                  ))}
                 </div>
               </fieldset>
-            </div>
 
-            {/* Readout with confidence arc */}
-            <div className="border border-rule bg-paper">
-              <div className="flex items-center justify-between border-b border-rule px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-ink">
-                <span>{t("panel.readout")}</span>
-                <span className="text-okabe-green">{t("panel.live")}</span>
-              </div>
-
-              {/* Confidence arc */}
-              <div className="flex items-center gap-5 border-b border-rule px-4 py-4">
-                <svg
-                  viewBox="0 0 140 140"
-                  className="h-[120px] w-[120px] shrink-0"
-                  aria-hidden="true"
-                >
-                  <circle
-                    cx="70"
-                    cy="70"
-                    r="56"
-                    fill="none"
-                    stroke="var(--color-rule)"
-                    strokeWidth="8"
-                  />
-                  <circle
-                    cx="70"
-                    cy="70"
-                    r="56"
-                    fill="none"
-                    stroke={low ? ACCENTS.vermillion : degColor}
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    strokeDasharray={arcLen}
-                    strokeDashoffset={arcOffset}
-                    transform="rotate(-90 70 70)"
-                    style={{ transition: "stroke-dashoffset 320ms ease-out, stroke 200ms" }}
-                  />
-                  <text
-                    x="70"
-                    y="76"
-                    textAnchor="middle"
-                    className="font-mono"
-                    style={{
-                      fontSize: "22px",
-                      fontWeight: 700,
-                      fill: low ? ACCENTS.vermillion : "var(--color-ink)",
-                      fontFamily: "var(--font-mono)",
-                    }}
-                  >
-                    {conf}
-                  </text>
-                  <text
-                    x="70"
-                    y="94"
-                    textAnchor="middle"
-                    style={{
-                      fontSize: "9px",
-                      fill: "var(--color-muted-ink)",
-                      fontFamily: "var(--font-mono)",
-                      letterSpacing: "0.18em",
-                    }}
-                  >
-                    {t("panel.percent")}
-                  </text>
-                </svg>
-                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-ink">
-                  <div>{t("panel.predicted")}</div>
-                  <div>{t("panel.confidence")}</div>
-                  <div className="mt-2 text-ink">
-                    {low ? t("panel.collapse") : confidence > 80 ? t("panel.stable") : t("panel.degraded")}
-                  </div>
+              {/* readout */}
+              <div className="p-4">
+                <div className="flex items-baseline justify-between">
+                  <span className="label-md text-muted-ink">
+                    {t("panel.predicted")} {t("panel.confidence")}
+                  </span>
+                  <span className="label text-signal">{t("panel.live")}</span>
                 </div>
+                <p className="mt-3 flex items-baseline gap-3">
+                  <span className="font-display text-[3.25rem] leading-none" style={{ color: low ? "var(--signal)" : "var(--ink)" }}>
+                    {conf}
+                  </span>
+                  <span className="label-md text-muted-ink">{t("panel.percent")}</span>
+                  <span className="label-md ml-auto text-ink">{status}</span>
+                </p>
+                <div className="mt-2">
+                  <Meter value={confidence} />
+                </div>
+                <dl className="ruled mt-4 border-t border-rule text-base">
+                  {[
+                    [t("panel.field.model"), "ResNet-18"],
+                    [t("panel.field.degradation"), DEG_LABEL[degradation]],
+                    [t("panel.field.severity"), String(severity)],
+                    [t("panel.field.training"), TRAIN_LABEL[training]],
+                  ].map(([k, v]) => (
+                    <div key={k} className="flex items-baseline justify-between py-1.5">
+                      <dt className="label text-muted-ink">{k}</dt>
+                      <dd className="text-ink">{v}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
-
-              <dl className="divide-y divide-[color:var(--color-rule)] font-mono text-xs">
-                {[
-                  [t("panel.field.model"), "ResNet-18"],
-                  [t("panel.field.degradation"), DEG_LABEL[degradation]],
-                  [t("panel.field.severity"), String(severity)],
-                  [t("panel.field.training"), TRAIN_LABEL[training]],
-                ].map(([k, v]) => (
-                  <div key={k} className="flex items-center justify-between px-4 py-2.5">
-                    <dt className="text-muted-ink">{k}</dt>
-                    <dd className="text-ink">{v}</dd>
-                  </div>
-                ))}
-              </dl>
             </div>
-
-            <p className="font-body text-xs text-muted-ink">{t("panel.note")}</p>
           </div>
         </div>
-      </div>
+      </Wrap>
     </section>
   );
 }

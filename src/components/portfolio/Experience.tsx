@@ -1,35 +1,29 @@
 import { useT } from "./i18n";
+import { SectionHead, Wrap } from "./lab";
+import { OrbitDiagram } from "./retro";
 
 type Row = { date: string; title: string; org?: string; note?: string };
 
-const ACCENT = {
-  blue: "var(--color-okabe-blue)",
-  orange: "var(--color-okabe-orange)",
-  vermillion: "var(--color-vermillion)",
-};
+const TV_URL = "https://www.science.lu/de/kandidaten-portrait-staffel-1/take-kandidatin-nicole-duque-im-interview";
 
-function List({ rows }: { rows: Row[] }) {
+/* A vertical ruler: entries hang off a rule with a tick at each one. */
+function Track({ heading, rows }: { heading: string; rows: Row[] }) {
   return (
-    <ul className="border-t border-rule">
-      {rows.map((r, i) => (
-        <li key={i} className="grid gap-1 border-b border-rule py-5 sm:grid-cols-[180px_1fr] sm:gap-6">
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-ink">
-            {r.date}
-          </p>
-          <div>
-            <p className="font-body text-base font-medium text-ink">{r.title}</p>
-            {r.org && (
-              <p className="font-body text-sm text-muted-ink">{r.org}</p>
-            )}
-            {r.note && (
-              <p className="mt-2 max-w-[62ch] font-body text-sm leading-relaxed text-ink">
-                {r.note}
-              </p>
-            )}
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h3 className="font-display border-b-2 border-ink pb-3 text-[1rem] uppercase">{heading}</h3>
+      <ol className="ml-2 border-l border-ink">
+        {rows.map((r, i) => (
+          <li key={i} className="relative py-5 pl-7">
+            <span aria-hidden="true" className="absolute left-0 top-[1.85rem] h-px w-4 bg-ink" />
+            <span aria-hidden="true" className="absolute -left-[5px] top-[1.55rem] h-[9px] w-[9px] bg-signal" />
+            <p className="label-md text-signal">{r.date}</p>
+            <p className="mt-1.5 text-[1.25rem] leading-[1.3]">{r.title}</p>
+            {r.org ? <p className="mt-0.5 text-[1.0625rem] italic text-muted-ink">{r.org}</p> : null}
+            {r.note ? <p className="mt-2 max-w-[48ch] text-base leading-snug">{r.note}</p> : null}
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
 
@@ -46,80 +40,56 @@ export function Experience() {
     title: t(`exp.${k}.title`),
     org: t(`exp.${k}.org`),
   }));
+  const certs = [t("exp.cert1"), t("exp.cert2"), t("exp.cert3")];
+
   return (
-    <section
-      id="experience"
-      aria-labelledby="experience-heading"
-      className="border-b border-rule"
-    >
-      <div className="mx-auto max-w-[960px] px-5 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
-          <span
-            aria-hidden="true"
-            className="inline-block h-[7px] w-[7px] rounded-full"
-            style={{ background: ACCENT.blue }}
-          />
-          {t("exp.plate")}
-        </div>
-        <h2
+    <section id="experience" aria-labelledby="experience-heading" className="border-b-2 border-ink">
+      <Wrap className="py-14 sm:py-20">
+        <SectionHead
+          n="04"
           id="experience-heading"
-          className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl"
+          aside={<OrbitDiagram className="ml-auto hidden w-full max-w-[340px] lg:block" />}
         >
-          {t("exp.title.a")} <span className="italic" style={{ color: ACCENT.blue }}>{t("exp.title.b")}</span>
-        </h2>
+          {t("exp.title.a")}
+          <br />
+          <span className="font-body text-[1.5em] normal-case italic">{t("exp.title.b")}</span>
+        </SectionHead>
 
-        <div className="mt-10">
-          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
-            <span
-              aria-hidden="true"
-              className="inline-block h-[6px] w-[6px] rounded-full"
-              style={{ background: ACCENT.blue }}
-            />
-            {t("exp.experience")}
-          </h3>
-          <List rows={experience} />
+        <div className="mt-12 grid gap-x-8 gap-y-12 lg:grid-cols-12">
+          <div className="lg:col-span-5 lg:col-start-3">
+            <Track heading={t("exp.experience")} rows={experience} />
+          </div>
+          <div className="lg:col-span-5">
+            <Track heading={t("exp.education")} rows={education} />
+          </div>
         </div>
 
-        <div className="mt-12">
-          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
-            <span
-              aria-hidden="true"
-              className="inline-block h-[6px] w-[6px] rounded-full"
-              style={{ background: ACCENT.orange }}
-            />
-            {t("exp.education")}
-          </h3>
-          <List rows={education} />
+        <div className="mt-14 grid gap-x-8 lg:grid-cols-12">
+          <div className="lg:col-span-10 lg:col-start-3">
+            <h3 className="font-display border-b-2 border-ink pb-3 text-[1rem] uppercase">{t("exp.cert")}</h3>
+            <ol className="ruled">
+              {[...certs, null].map((c, i) => (
+                <li key={i} className="grid grid-cols-[3rem_1fr] gap-4 py-4 sm:grid-cols-[4rem_1fr]">
+                  <span aria-hidden="true" className="numeral text-[1.5rem]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="max-w-[70ch] text-[1.0625rem] leading-[1.5]">
+                    {c ?? (
+                      <>
+                        {t("exp.cert4a")}
+                        <a className="link" href={TV_URL} target="_blank" rel="noreferrer">
+                          {t("exp.cert4link")}
+                        </a>
+                        {t("exp.cert4b")}
+                      </>
+                    )}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
-
-        <div className="mt-12">
-          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
-            <span
-              aria-hidden="true"
-              className="inline-block h-[6px] w-[6px] rounded-full"
-              style={{ background: ACCENT.vermillion }}
-            />
-            {t("exp.cert")}
-          </h3>
-          <ul className="mt-4 space-y-3 font-body text-base leading-relaxed text-ink">
-            <li>{t("exp.cert1")}</li>
-            <li>{t("exp.cert2")}</li>
-            <li>{t("exp.cert3")}</li>
-            <li>
-              {t("exp.cert4a")}
-              <a
-                className="text-okabe-blue underline decoration-okabe-blue/40 underline-offset-2 hover:decoration-okabe-blue focus-visible:outline-2 focus-visible:outline-okabe-blue"
-                href="https://www.science.lu/de/kandidaten-portrait-staffel-1/take-kandidatin-nicole-duque-im-interview"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t("exp.cert4link")}
-              </a>
-              {t("exp.cert4b")}
-            </li>
-          </ul>
-        </div>
-      </div>
+      </Wrap>
     </section>
   );
 }
