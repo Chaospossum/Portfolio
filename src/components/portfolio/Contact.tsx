@@ -8,7 +8,7 @@ export function Contact() {
     <>
       <section id="contact" aria-labelledby="contact-heading">
         <div className="mx-auto max-w-[960px] px-5 py-16 sm:px-8 sm:py-20">
-          <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
             <span
               aria-hidden="true"
               className="inline-block h-[7px] w-[7px] rounded-full"
@@ -53,7 +53,7 @@ export function Contact() {
         </div>
       </section>
       <footer className="border-t border-rule">
-        <div className="mx-auto flex max-w-[960px] flex-col items-start justify-between gap-2 px-5 py-8 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-ink sm:flex-row sm:px-8">
+        <div className="mx-auto flex max-w-[960px] flex-col items-start justify-between gap-2 px-5 py-8 font-mono text-xs uppercase tracking-[0.18em] text-muted-ink sm:flex-row sm:px-8">
           <span>NICOLE DUQUE</span>
           <span>LUXEMBOURG</span>
           <span>{year}</span>

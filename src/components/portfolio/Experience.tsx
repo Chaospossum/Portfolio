@@ -13,7 +13,7 @@ function List({ rows }: { rows: Row[] }) {
     <ul className="border-t border-rule">
       {rows.map((r, i) => (
         <li key={i} className="grid gap-1 border-b border-rule py-5 sm:grid-cols-[180px_1fr] sm:gap-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-ink">
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-ink">
             {r.date}
           </p>
           <div>
@@ -53,7 +53,7 @@ export function Experience() {
       className="border-b border-rule"
     >
       <div className="mx-auto max-w-[960px] px-5 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
           <span
             aria-hidden="true"
             className="inline-block h-[7px] w-[7px] rounded-full"
@@ -69,7 +69,7 @@ export function Experience() {
         </h2>
 
         <div className="mt-10">
-          <h3 className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
             <span
               aria-hidden="true"
               className="inline-block h-[6px] w-[6px] rounded-full"
@@ -81,7 +81,7 @@ export function Experience() {
         </div>
 
         <div className="mt-12">
-          <h3 className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
             <span
               aria-hidden="true"
               className="inline-block h-[6px] w-[6px] rounded-full"
@@ -93,7 +93,7 @@ export function Experience() {
         </div>
 
         <div className="mt-12">
-          <h3 className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
             <span
               aria-hidden="true"
               className="inline-block h-[6px] w-[6px] rounded-full"

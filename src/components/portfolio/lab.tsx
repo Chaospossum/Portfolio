@@ -26,7 +26,7 @@ export function Plate({
   caption?: string;
 }) {
   return (
-    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-[0.18em]">
+    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-xs uppercase tracking-[0.18em]">
       <span className="flex items-center gap-2 text-ink">
         <span
           aria-hidden="true"

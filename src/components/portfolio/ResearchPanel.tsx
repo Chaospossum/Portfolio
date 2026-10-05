@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import portraitUrl from "@/assets/portrait.png";
+import portraitUrl from "@/assets/portrait.webp";
 import { ACCENTS, Plate } from "./lab";
 import { useT } from "./i18n";
 
 type Degradation = "Blur" | "Noise" | "Compression" | "Lighting";
-type Training = "Single-type training" | "Mixed augmentation";
+type Training = "No augmentation" | "Mixed augmentation";
 
 const TYPES: Degradation[] = ["Blur", "Noise", "Compression", "Lighting"];
 
@@ -22,19 +22,16 @@ function sigmoid(x: number) {
 function confidenceFor(deg: Degradation, severity: number, training: Training) {
   const s = severity;
   if (training === "Mixed augmentation") {
-    const top = 92;
+    const top = 92.09;
     const floor = deg === "Blur" ? 60 : 63;
     return floor + (top - floor) * Math.pow(1 - s / 100, 1.4);
   }
-  // Single-type training: sharp collapse
-  if (deg === "Blur") {
-    const top = 95;
-    const bottom = 13;
-    return bottom + (top - bottom) * (1 - sigmoid((s - 70) / 6));
-  }
-  const top = 95;
-  const bottom = deg === "Noise" ? 19 : deg === "Compression" ? 24 : 22;
-  return bottom + (top - bottom) * (1 - sigmoid((s - 65) / 8));
+  // No augmentation (baseline): floors are the measured severity-3 ResNet-18 results from the thesis
+  const top = 95.09;
+  const bottom =
+    deg === "Blur" ? 17.48 : deg === "Noise" ? 24.97 : deg === "Compression" ? 39.82 : 89.83;
+  const mid = deg === "Blur" ? 45 : 65;
+  return bottom + (top - bottom) * (1 - sigmoid((s - mid) / 9));
 }
 
 function useImage(src: string) {
@@ -57,12 +54,12 @@ export function ResearchPanel() {
     Lighting: t("panel.deg.lighting"),
   };
   const TRAIN_LABEL: Record<Training, string> = {
-    "Single-type training": t("panel.training.single"),
+    "No augmentation": t("panel.training.single"),
     "Mixed augmentation": t("panel.training.mixed"),
   };
   const [degradation, setDegradation] = useState<Degradation>("Blur");
   const [severity, setSeverity] = useState(0);
-  const [training, setTraining] = useState<Training>("Single-type training");
+  const [training, setTraining] = useState<Training>("No augmentation");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const img = useImage(portraitUrl);
 
@@ -234,7 +231,7 @@ export function ResearchPanel() {
                   {t("panel.training")}
                 </legend>
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-                  {(["Single-type training", "Mixed augmentation"] as Training[]).map((opt) => {
+                  {(["No augmentation", "Mixed augmentation"] as Training[]).map((opt) => {
                     const active = opt === training;
                     return (
                       <button

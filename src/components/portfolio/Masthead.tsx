@@ -30,7 +30,7 @@ export function Masthead() {
         </div>
 
         {/* Ticker kicker with colored bullets */}
-        <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+        <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
           {KICKER.map((k) => (
             <li key={k.word} className="flex items-center gap-2">
               <span
@@ -55,14 +55,17 @@ export function Masthead() {
           <p className="max-w-[58ch] font-body text-base leading-relaxed text-ink sm:text-lg">
             {t("mast.intro")}
           </p>
-          <div className="flex shrink-0 items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-ink">
+          <a
+            href="#contact"
+            className="flex shrink-0 items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-ink underline decoration-rule underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-okabe-blue"
+          >
             <span
               aria-hidden="true"
               className="inline-block h-[6px] w-[6px] rounded-full"
               style={{ background: ACCENTS.green }}
             />
             <span>{t("mast.available")}</span>
-          </div>
+          </a>
         </div>
       </div>
     </section>

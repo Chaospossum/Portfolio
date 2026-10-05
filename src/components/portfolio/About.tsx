@@ -6,7 +6,7 @@ export function About() {
   return (
     <section id="about" aria-labelledby="about-heading" className="border-b border-rule">
       <div className="mx-auto max-w-[960px] px-5 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink">
           <span
             aria-hidden="true"
             className="inline-block h-[7px] w-[7px] rounded-full"
@@ -41,10 +41,6 @@ export function About() {
             {t("about.tv.link")}
           </a>
           .
-        </p>
-
-        <p className="mt-4 max-w-[62ch] font-body text-base leading-relaxed text-muted-ink">
-          {t("about.outside")}
         </p>
       </div>
     </section>

@@ -10,22 +10,7 @@ import { SettingsProvider } from "@/components/portfolio/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "Nicole Duque, Imaging Engineering" },
-      {
-        name: "description",
-        content:
-          "Nicole Duque, imaging engineering, computer vision systems, and experimental hardware. Luxembourg.",
-      },
-      { property: "og:title", content: "Nicole Duque, Imaging Engineering" },
-      {
-        property: "og:description",
-        content:
-          "Imaging engineering, computer vision systems, and experimental hardware. Luxembourg.",
-      },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
+    meta: [{ title: "Nicole Duque, Imaging Engineering" }],
   }),
   component: Index,
 });
